@@ -1,0 +1,252 @@
+<resources>
+    <string name="app_name">技能树</string>
+
+    <!-- 导航 -->
+    <string name="nav_skill_tree">技能树</string>
+    <string name="nav_statistics">统计</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 技能树主页 -->
+    <string name="tree_search_hint">搜索节点...</string>
+    <string name="tree_empty_title">欢迎来到技能树</string>
+    <string name="tree_empty_description">开始构建你的技能知识图谱</string>
+    <string name="tree_load_sample">加载示例数据</string>
+    <string name="tree_create_first">创建第一个节点</string>
+    <string name="tree_export_success">已导出到 %s</string>
+    <string name="tree_export_failed">导出失败: %s</string>
+    <string name="tree_drag_hint">点击目标节点放置，点击空白取消</string>
+    <string name="tree_no_results">未找到匹配的节点</string>
+    <string name="tree_no_results_hint">试试其他关键词或调整标签筛选</string>
+    <string name="tree_search_history">搜索历史</string>
+    <string name="tree_clear_history">清除</string>
+    <string name="tree_tag_filter">标签筛选</string>
+
+    <!-- 节点详情 -->
+    <string name="node_detail_title">节点详情</string>
+    <string name="node_edit">编辑</string>
+    <string name="node_view">查看</string>
+    <string name="node_save">保存</string>
+    <string name="node_cancel">取消</string>
+    <string name="node_delete">删除节点</string>
+    <string name="node_delete_confirm">确定要删除此节点吗？此操作无法撤销。</string>
+    <string name="node_type_ability">能力</string>
+    <string name="node_type_resource">物质</string>
+    <string name="node_type_unknown">未知</string>
+    <string name="node_content_label">内容</string>
+    <string name="node_content_placeholder">输入 Markdown 内容...</string>
+    <string name="node_content_empty">暂无内容，点击编辑按钮添加</string>
+    <string name="node_tags">标签</string>
+    <string name="node_tags_empty">暂无标签，点击 + 添加</string>
+    <string name="node_links">关联节点</string>
+    <string name="node_links_empty">暂无关联节点</string>
+    <string name="node_ai_suggestions">AI 推荐链接</string>
+    <string name="node_more">更多</string>
+    <string name="node_back">返回</string>
+
+    <!-- 创建节点 -->
+    <string name="create_node_title">新建节点</string>
+    <string name="create_node_label">节点标题</string>
+    <string name="create_node_type">节点类型</string>
+    <string name="create_node_parent">所属父节点（可选）</string>
+    <string name="create_node_no_parent">无（作为根节点）</string>
+    <string name="create_node_button">创建</string>
+
+    <!-- 标签 -->
+    <string name="tag_add_title">添加标签</string>
+    <string name="tag_search_hint">搜索或创建标签...</string>
+    <string name="tag_create_hint">创建标签 \"%s\"</string>
+    <string name="tag_existing">已有标签：</string>
+    <string name="tag_done">完成</string>
+    <string name="tag_section_title">🏷️ 标签</string>
+    <string name="tag_empty_hint">暂无标签，点击 + 添加</string>
+
+    <!-- 添加链接 -->
+    <string name="link_add_title">添加关联节点</string>
+    <string name="link_search_hint">搜索目标节点...</string>
+    <string name="link_confirm">确认 (%d)</string>
+    <string name="link_section_title">🔗 关联节点 (%d)</string>
+    <string name="link_empty">暂无关联节点</string>
+    <string name="link_add_first">添加第一个关联</string>
+    <string name="link_ai_suggestions">🤖 AI 推荐链接 (%d)</string>
+    <string name="link_type_manual">手动关联</string>
+    <string name="link_type_ai">AI 推荐</string>
+    <string name="link_ignore">忽略</string>
+
+    <!-- 添加附件 -->
+    <string name="attachment_add_title">添加附件</string>
+    <string name="attachment_take_photo">拍照</string>
+    <string name="attachment_from_gallery">从相册选择</string>
+    <string name="attachment_from_file">从文件选择</string>
+    <string name="attachment_section_title">📎 附件 (%d)</string>
+    <string name="attachment_empty">暂无附件</string>
+    <string name="attachment_add_first">添加第一个附件</string>
+    <string name="attachment_unknown_size">未知大小</string>
+
+    <!-- 设置 -->
+    <string name="settings_title">设置</string>
+    <string name="settings_appearance">外观</string>
+    <string name="settings_theme">主题模式</string>
+    <string name="settings_theme_desc">切换暗色/亮色/跟随系统</string>
+    <string name="settings_theme_dark">暗色模式</string>
+    <string name="settings_theme_light">亮色模式</string>
+    <string name="settings_theme_system">跟随系统</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_language_desc">切换应用语言</string>
+    <string name="settings_language_zh">中文</string>
+    <string name="settings_language_en">English</string>
+    <string name="settings_language_system">跟随系统</string>
+    <string name="settings_data_management">数据管理</string>
+    <string name="settings_export_markdown">导出 Markdown</string>
+    <string name="settings_export_desc">将所有节点导出为 Markdown 文件</string>
+    <string name="settings_load_sample">加载示例数据</string>
+    <string name="settings_load_sample_desc">加载一棵预置的示例技能树</string>
+    <string name="settings_clear_data">清除所有数据</string>
+    <string name="settings_clear_data_desc">删除所有节点、标签和链接</string>
+    <string name="settings_clear_confirm">此操作将删除所有节点、标签和链接，且无法恢复。确定要继续吗？</string>
+    <string name="settings_clear_confirm_btn">确认清除</string>
+    <string name="settings_content_management">内容管理</string>
+    <string name="settings_tag_management">标签管理</string>
+    <string name="settings_tag_management_desc">查看和管理所有标签</string>
+    <string name="settings_link_management">链接管理</string>
+    <string name="settings_link_management_desc">查看和管理跨分支链接</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_restart_onboarding">重新引导</string>
+    <string name="settings_restart_onboarding_desc">重新查看新手引导</string>
+    <string name="settings_about_app">关于技能树</string>
+    <string name="settings_version">版本 1.0.0</string>
+
+    <!-- 统计 -->
+    <string name="stats_title">统计面板</string>
+    <string name="stats_total_nodes">总节点数</string>
+    <string name="stats_max_depth">最大深度</string>
+    <string name="stats_ability_nodes">能力节点</string>
+    <string name="stats_resource_nodes">资源节点</string>
+    <string name="stats_unlocked_achievements">已解锁成就</string>
+    <string name="stats_node_distribution">节点分布</string>
+    <string name="stats_achievements">成就</string>
+    <string name="stats_no_data">暂无数据</string>
+    <string name="stats_ability_label">能力</string>
+    <string name="stats_resource_label">资源</string>
+
+    <!-- 成就 -->
+    <string name="achievement_unlocked">成就解锁！</string>
+    <string name="achievement_reward">奖励：%s</string>
+    <string name="achievement_first_node">第一步 - 创建了第一个技能节点</string>
+    <string name="achievement_ten_nodes">技能收集者 - 创建了 10 个技能节点</string>
+    <string name="achievement_fifty_nodes">技能大师 - 创建了 50 个技能节点</string>
+    <string name="achievement_twenty_links">网络构建者 - 创建了 20 个链接</string>
+    <string name="achievement_five_level5">专家 - 5 个节点达到 5 级</string>
+    <string name="achievement_tree_depth5">深度思考者 - 树深度达到 5 层</string>
+
+    <!-- 通用 -->
+    <string name="common_ok">确定</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_confirm">确认</string>
+    <string name="common_retry">重试</string>
+    <string name="common_skip">跳过</string>
+    <string name="common_back">返回</string>
+    <string name="common_loading">加载中...</string>
+    <string name="common_error">错误</string>
+    <string name="common_unknown_error">未知错误</string>
+    <string name="common_close">关闭</string>
+
+    <!-- 错误消息 -->
+    <string name="error_node_not_found">节点不存在</string>
+    <string name="error_parent_not_found">父节点不存在</string>
+    <string name="error_circular_reference">无法移动节点 - 会产生循环引用</string>
+    <string name="error_max_children">子节点数量已达上限</string>
+    <string name="error_storage">存储错误 - 请检查设备存储</string>
+    <string name="error_validation">验证失败 - 请检查输入</string>
+    <string name="error_invalid_node_type">无效的节点类型</string>
+    <string name="error_tag_exists">标签已存在</string>
+    <string name="error_link_exists">链接已存在</string>
+    <string name="error_self_link">不能链接到自身</string>
+    <string name="error_database">数据库错误 - 请重试</string>
+    <string name="error_file_not_found">文件不存在</string>
+    <string name="error_storage_full">存储空间不足</string>
+    <string name="error_io">文件读写错误</string>
+    <string name="error_unknown">未知错误</string>
+
+    <!-- 新手引导 -->
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_get_started">开始使用</string>
+    <string name="onboarding_page1_title">构建你的技能树</string>
+    <string name="onboarding_page1_desc">将知识组织为可视化树形结构</string>
+    <string name="onboarding_page2_title">追踪进度</string>
+    <string name="onboarding_page2_desc">提升技能等级，解锁成就</string>
+    <string name="onboarding_page3_title">连接知识</string>
+    <string name="onboarding_page3_desc">跨分支关联相关技能</string>
+
+    <!-- 引导页功能介绍 -->
+    <string name="onboard_feat_quick_record">随手记录</string>
+    <string name="onboard_feat_quick_record_desc">3秒完成</string>
+    <string name="onboard_feat_tree_viz">树状可视化</string>
+    <string name="onboard_feat_tree_viz_desc">一目了然</string>
+    <string name="onboard_feat_smart_link">智能关联</string>
+    <string name="onboard_feat_smart_link_desc">发现新可能</string>
+    <string name="onboard_feat_local_storage">本地存储</string>
+    <string name="onboard_feat_local_storage_desc">数据安全</string>
+    <string name="onboard_feat_search">搜索</string>
+    <string name="onboard_feat_search_desc">查找节点</string>
+    <string name="onboard_feat_create">创建节点</string>
+    <string name="onboard_feat_create_desc">添加新能力/物质</string>
+    <string name="onboard_feat_edit">编辑内容</string>
+    <string name="onboard_feat_edit_desc">Markdown笔记</string>
+    <string name="onboard_feat_link">关联节点</string>
+    <string name="onboard_feat_link_desc">建立跨分支链接</string>
+    <string name="onboard_feat_export">导出</string>
+    <string name="onboard_feat_export_desc">导出Markdown</string>
+
+    <!-- 引导页内容 -->
+    <string name="onboard_app_name">技能树 Skill-Tree</string>
+    <string name="onboard_app_slogan">把你的能力和资产变成一棵可生长的技能树</string>
+    <string name="onboard_explore">开始探索</string>
+    <string name="onboard_create_first_node">创建你的第一个节点</string>
+    <string name="onboard_node_types_desc">技能树由能力和物质两种节点组成</string>
+    <string name="onboard_example_ability">例如：Python 编程</string>
+    <string name="onboard_type_tip">💡 提示：能力节点代表你的技能和知识，物质节点代表你拥有的物品和资源</string>
+    <string name="onboard_create_later">稍后创建</string>
+    <string name="onboard_your_tree">这是你的技能树！</string>
+    <string name="onboard_sample_tree">📊 示例技能树（可视化）</string>
+    <string name="onboard_tip_label">💡 提示：</string>
+    <string name="onboard_tip_zoom">• 双指缩放查看全局</string>
+    <string name="onboard_tip_pan">• 单指拖动平移画布</string>
+    <string name="onboard_tip_tap">• 点击节点查看详情</string>
+    <string name="onboard_keep_sample">保留示例数据</string>
+    <string name="onboard_enter_home">进入主页</string>
+    <string name="onboard_ready">准备就绪！</string>
+    <string name="onboard_ready_desc">你已经掌握了基础操作，以下是更多功能介绍：</string>
+
+    <!-- 内容描述 -->
+    <string name="cd_export">导出</string>
+    <string name="cd_add_node">添加节点</string>
+    <string name="cd_search">搜索</string>
+    <string name="cd_close_search">关闭搜索</string>
+    <string name="cd_search_icon">搜索图标</string>
+    <string name="cd_clear_search">清除搜索</string>
+    <string name="cd_selected">已选择</string>
+    <string name="cd_add_attachment">添加附件</string>
+    <string name="cd_delete_attachment">删除附件</string>
+    <string name="cd_add_link">添加链接</string>
+    <string name="cd_delete_link">删除链接</string>
+    <string name="cd_add_tag">添加标签</string>
+    <string name="cd_view_image">查看图片</string>
+
+    <!-- 无障碍描述 -->
+    <string name="a11y_search_history">搜索历史区域</string>
+    <string name="a11y_tag_filter">标签筛选区域</string>
+    <string name="a11y_add_attachment">添加附件</string>
+    <string name="a11y_attachment_view">附件：%s，点击查看</string>
+    <string name="a11y_add_link">添加关联节点</string>
+    <string name="a11y_linked_node_view">关联节点：%s，点击查看详情</string>
+    <string name="a11y_suggested_link">推荐关联：%s</string>
+    <string name="a11y_node_click_detail">查看 %s 的详情</string>
+    <string name="a11y_node_type_ability">能力节点：</string>
+    <string name="a11y_node_type_resource">物质节点：</string>
+    <string name="a11y_node_level">，等级 %d</string>
+    <string name="a11y_node_children">，%d 个子节点</string>
+    <string name="a11y_node_has_content">，有详细内容</string>
+    <string name="a11y_state_click_detail">点击查看详情</string>
+    <string name="a11y_state_long_press_menu">，长按显示操作菜单</string>
+</resources>

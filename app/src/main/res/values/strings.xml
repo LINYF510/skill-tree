@@ -1,3 +1,252 @@
 <resources>
-    <string name="app_name">skill-tree</string>
+    <string name="app_name">Skill-Tree</string>
+
+    <!-- Navigation -->
+    <string name="nav_skill_tree">Skill Tree</string>
+    <string name="nav_statistics">Statistics</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Skill Tree Home -->
+    <string name="tree_search_hint">Search nodes...</string>
+    <string name="tree_empty_title">Welcome to Skill-Tree</string>
+    <string name="tree_empty_description">Start building your skill knowledge graph</string>
+    <string name="tree_load_sample">Load Sample Data</string>
+    <string name="tree_create_first">Create First Node</string>
+    <string name="tree_export_success">Exported to %s</string>
+    <string name="tree_export_failed">Export failed: %s</string>
+    <string name="tree_drag_hint">Tap target node to place, tap empty to cancel</string>
+    <string name="tree_no_results">No matching nodes found</string>
+    <string name="tree_no_results_hint">Try different keywords or adjust tag filters</string>
+    <string name="tree_search_history">Search History</string>
+    <string name="tree_clear_history">Clear</string>
+    <string name="tree_tag_filter">Tag Filter</string>
+
+    <!-- Node Detail -->
+    <string name="node_detail_title">Node Detail</string>
+    <string name="node_edit">Edit</string>
+    <string name="node_view">View</string>
+    <string name="node_save">Save</string>
+    <string name="node_cancel">Cancel</string>
+    <string name="node_delete">Delete Node</string>
+    <string name="node_delete_confirm">Are you sure you want to delete this node? This action cannot be undone.</string>
+    <string name="node_type_ability">Ability</string>
+    <string name="node_type_resource">Resource</string>
+    <string name="node_type_unknown">Unknown</string>
+    <string name="node_content_label">Content</string>
+    <string name="node_content_placeholder">Enter Markdown content...</string>
+    <string name="node_content_empty">No content. Tap edit to add.</string>
+    <string name="node_tags">Tags</string>
+    <string name="node_tags_empty">No tags. Tap + to add.</string>
+    <string name="node_links">Linked Nodes</string>
+    <string name="node_links_empty">No linked nodes</string>
+    <string name="node_ai_suggestions">AI Suggestions</string>
+    <string name="node_more">More</string>
+    <string name="node_back">Back</string>
+
+    <!-- Create Node -->
+    <string name="create_node_title">Create Node</string>
+    <string name="create_node_label">Node Title</string>
+    <string name="create_node_type">Node Type</string>
+    <string name="create_node_parent">Parent Node (optional)</string>
+    <string name="create_node_no_parent">None (as root node)</string>
+    <string name="create_node_button">Create</string>
+
+    <!-- Tags -->
+    <string name="tag_add_title">Add Tags</string>
+    <string name="tag_search_hint">Search or create tag...</string>
+    <string name="tag_create_hint">Create tag \"%s\"</string>
+    <string name="tag_existing">Existing Tags:</string>
+    <string name="tag_done">Done</string>
+    <string name="tag_section_title">🏷️ Tags</string>
+    <string name="tag_empty_hint">No tags, tap + to add</string>
+
+    <!-- Add Link -->
+    <string name="link_add_title">Add Linked Node</string>
+    <string name="link_search_hint">Search target node...</string>
+    <string name="link_confirm">Confirm (%d)</string>
+    <string name="link_section_title">🔗 Linked Nodes (%d)</string>
+    <string name="link_empty">No linked nodes</string>
+    <string name="link_add_first">Add first link</string>
+    <string name="link_ai_suggestions">🤖 AI Suggestions (%d)</string>
+    <string name="link_type_manual">Manual link</string>
+    <string name="link_type_ai">AI Suggested</string>
+    <string name="link_ignore">Ignore</string>
+
+    <!-- Add Attachment -->
+    <string name="attachment_add_title">Add Attachment</string>
+    <string name="attachment_take_photo">Take Photo</string>
+    <string name="attachment_from_gallery">From Gallery</string>
+    <string name="attachment_from_file">From File</string>
+    <string name="attachment_section_title">📎 Attachments (%d)</string>
+    <string name="attachment_empty">No attachments</string>
+    <string name="attachment_add_first">Add first attachment</string>
+    <string name="attachment_unknown_size">Unknown size</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_desc">Switch dark/light/system</string>
+    <string name="settings_theme_dark">Dark Mode</string>
+    <string name="settings_theme_light">Light Mode</string>
+    <string name="settings_theme_system">Follow System</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_desc">Switch app language</string>
+    <string name="settings_language_zh">中文</string>
+    <string name="settings_language_en">English</string>
+    <string name="settings_language_system">Follow System</string>
+    <string name="settings_data_management">Data Management</string>
+    <string name="settings_export_markdown">Export Markdown</string>
+    <string name="settings_export_desc">Export all nodes as Markdown files</string>
+    <string name="settings_load_sample">Load Sample Data</string>
+    <string name="settings_load_sample_desc">Load a pre-built sample skill tree</string>
+    <string name="settings_clear_data">Clear All Data</string>
+    <string name="settings_clear_data_desc">Delete all nodes, tags and links</string>
+    <string name="settings_clear_confirm">This will delete all nodes, tags and links. This action cannot be undone. Continue?</string>
+    <string name="settings_clear_confirm_btn">Confirm Delete</string>
+    <string name="settings_content_management">Content Management</string>
+    <string name="settings_tag_management">Tag Management</string>
+    <string name="settings_tag_management_desc">View and manage all tags</string>
+    <string name="settings_link_management">Link Management</string>
+    <string name="settings_link_management_desc">View and manage cross-branch links</string>
+    <string name="settings_about">About</string>
+    <string name="settings_restart_onboarding">Restart Guide</string>
+    <string name="settings_restart_onboarding_desc">View the onboarding again</string>
+    <string name="settings_about_app">About Skill-Tree</string>
+    <string name="settings_version">Version 1.0.0</string>
+
+    <!-- Statistics -->
+    <string name="stats_title">Statistics</string>
+    <string name="stats_total_nodes">Total Nodes</string>
+    <string name="stats_max_depth">Max Depth</string>
+    <string name="stats_ability_nodes">Ability Nodes</string>
+    <string name="stats_resource_nodes">Resource Nodes</string>
+    <string name="stats_unlocked_achievements">Unlocked Achievements</string>
+    <string name="stats_node_distribution">Node Distribution</string>
+    <string name="stats_achievements">Achievements</string>
+    <string name="stats_no_data">No data</string>
+    <string name="stats_ability_label">Ability</string>
+    <string name="stats_resource_label">Resource</string>
+
+    <!-- Achievements -->
+    <string name="achievement_unlocked">Achievement Unlocked!</string>
+    <string name="achievement_reward">Reward: %s</string>
+    <string name="achievement_first_node">First Step - Created your first skill node</string>
+    <string name="achievement_ten_nodes">Skill Collector - Created 10 skill nodes</string>
+    <string name="achievement_fifty_nodes">Skill Master - Created 50 skill nodes</string>
+    <string name="achievement_twenty_links">Network Builder - Created 20 links</string>
+    <string name="achievement_five_level5">Expert - 5 nodes reached level 5</string>
+    <string name="achievement_tree_depth5">Deep Thinker - Tree depth reached 5 levels</string>
+
+    <!-- Common -->
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_confirm">Confirm</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_skip">Skip</string>
+    <string name="common_back">Back</string>
+    <string name="common_loading">Loading...</string>
+    <string name="common_error">Error</string>
+    <string name="common_unknown_error">Unknown error</string>
+    <string name="common_close">Close</string>
+
+    <!-- Error Messages -->
+    <string name="error_node_not_found">Node not found</string>
+    <string name="error_parent_not_found">Parent node not found</string>
+    <string name="error_circular_reference">Cannot move node - would create circular reference</string>
+    <string name="error_max_children">Maximum child nodes reached</string>
+    <string name="error_storage">Storage error - please check device storage</string>
+    <string name="error_validation">Validation failed - please check your input</string>
+    <string name="error_invalid_node_type">Invalid node type</string>
+    <string name="error_tag_exists">Tag already exists</string>
+    <string name="error_link_exists">Link already exists</string>
+    <string name="error_self_link">Cannot link node to itself</string>
+    <string name="error_database">Database error - please retry</string>
+    <string name="error_file_not_found">File not found</string>
+    <string name="error_storage_full">Storage space insufficient</string>
+    <string name="error_io">File read/write error</string>
+    <string name="error_unknown">Unknown error</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="onboarding_page1_title">Build Your Skill Tree</string>
+    <string name="onboarding_page1_desc">Organize your knowledge into a visual tree structure</string>
+    <string name="onboarding_page2_title">Track Progress</string>
+    <string name="onboarding_page2_desc">Level up your skills and unlock achievements</string>
+    <string name="onboarding_page3_title">Connect Knowledge</string>
+    <string name="onboarding_page3_desc">Link related skills across branches</string>
+
+    <!-- Onboarding Features -->
+    <string name="onboard_feat_quick_record">Quick Record</string>
+    <string name="onboard_feat_quick_record_desc">Done in 3 seconds</string>
+    <string name="onboard_feat_tree_viz">Tree Visualization</string>
+    <string name="onboard_feat_tree_viz_desc">Clear at a glance</string>
+    <string name="onboard_feat_smart_link">Smart Links</string>
+    <string name="onboard_feat_smart_link_desc">Discover new possibilities</string>
+    <string name="onboard_feat_local_storage">Local Storage</string>
+    <string name="onboard_feat_local_storage_desc">Data security</string>
+    <string name="onboard_feat_search">Search</string>
+    <string name="onboard_feat_search_desc">Find nodes</string>
+    <string name="onboard_feat_create">Create Node</string>
+    <string name="onboard_feat_create_desc">Add abilities/resources</string>
+    <string name="onboard_feat_edit">Edit Content</string>
+    <string name="onboard_feat_edit_desc">Markdown notes</string>
+    <string name="onboard_feat_link">Link Nodes</string>
+    <string name="onboard_feat_link_desc">Cross-branch connections</string>
+    <string name="onboard_feat_export">Export</string>
+    <string name="onboard_feat_export_desc">Export as Markdown</string>
+
+    <!-- Onboarding Content -->
+    <string name="onboard_app_name">Skill-Tree</string>
+    <string name="onboard_app_slogan">Turn your skills and assets into a growing skill tree</string>
+    <string name="onboard_explore">Start Exploring</string>
+    <string name="onboard_create_first_node">Create Your First Node</string>
+    <string name="onboard_node_types_desc">A skill tree consists of ability and resource nodes</string>
+    <string name="onboard_example_ability">e.g. Python Programming</string>
+    <string name="onboard_type_tip">💡 Tip: Ability nodes represent your skills and knowledge, resource nodes represent items and assets you own</string>
+    <string name="onboard_create_later">Create Later</string>
+    <string name="onboard_your_tree">This is your skill tree!</string>
+    <string name="onboard_sample_tree">📊 Sample Skill Tree (Visualization)</string>
+    <string name="onboard_tip_label">💡 Tips:</string>
+    <string name="onboard_tip_zoom">• Pinch to zoom for overview</string>
+    <string name="onboard_tip_pan">• Drag to pan the canvas</string>
+    <string name="onboard_tip_tap">• Tap a node for details</string>
+    <string name="onboard_keep_sample">Keep Sample Data</string>
+    <string name="onboard_enter_home">Enter Home</string>
+    <string name="onboard_ready">You\'re All Set!</string>
+    <string name="onboard_ready_desc">You\'ve mastered the basics. Here are more features to explore:</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_export">Export</string>
+    <string name="cd_add_node">Add node</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_close_search">Close search</string>
+    <string name="cd_search_icon">Search icon</string>
+    <string name="cd_clear_search">Clear search</string>
+    <string name="cd_selected">Selected</string>
+    <string name="cd_add_attachment">Add attachment</string>
+    <string name="cd_delete_attachment">Delete attachment</string>
+    <string name="cd_add_link">Add link</string>
+    <string name="cd_delete_link">Delete link</string>
+    <string name="cd_add_tag">Add tag</string>
+    <string name="cd_view_image">View image</string>
+
+    <!-- Accessibility Descriptions -->
+    <string name="a11y_search_history">Search history area</string>
+    <string name="a11y_tag_filter">Tag filter area</string>
+    <string name="a11y_add_attachment">Add attachment</string>
+    <string name="a11y_attachment_view">Attachment: %s, tap to view</string>
+    <string name="a11y_add_link">Add linked node</string>
+    <string name="a11y_linked_node_view">Linked node: %s, tap to view details</string>
+    <string name="a11y_suggested_link">Suggested link: %s</string>
+    <string name="a11y_node_click_detail">View details of %s</string>
+    <string name="a11y_node_type_ability">Ability node: </string>
+    <string name="a11y_node_type_resource">Resource node: </string>
+    <string name="a11y_node_level">, Level %d</string>
+    <string name="a11y_node_children">, %d child nodes</string>
+    <string name="a11y_node_has_content">, has content</string>
+    <string name="a11y_state_click_detail">Tap to view details</string>
+    <string name="a11y_state_long_press_menu">, long press for options</string>
 </resources>
