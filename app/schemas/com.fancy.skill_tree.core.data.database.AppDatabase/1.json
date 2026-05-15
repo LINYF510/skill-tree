@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4ca306aff2a4dea89c54057c0804e3db",
+    "identityHash": "79b354c904ba55910b1215ee24610ca8",
     "entities": [
       {
         "tableName": "skill_node",
@@ -96,6 +96,33 @@
             ],
             "orders": [],
             "createSql": "CREATE INDEX IF NOT EXISTS `index_skill_node_parentId` ON `${TABLE_NAME}` (`parentId`)"
+          },
+          {
+            "name": "index_skill_node_nodeType",
+            "unique": false,
+            "columnNames": [
+              "nodeType"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_skill_node_nodeType` ON `${TABLE_NAME}` (`nodeType`)"
+          },
+          {
+            "name": "index_skill_node_title",
+            "unique": false,
+            "columnNames": [
+              "title"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_skill_node_title` ON `${TABLE_NAME}` (`title`)"
+          },
+          {
+            "name": "index_skill_node_createdAt",
+            "unique": false,
+            "columnNames": [
+              "createdAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_skill_node_createdAt` ON `${TABLE_NAME}` (`createdAt`)"
           }
         ],
         "foreignKeys": [
@@ -399,7 +426,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ca306aff2a4dea89c54057c0804e3db')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '79b354c904ba55910b1215ee24610ca8')"
     ]
   }
 }

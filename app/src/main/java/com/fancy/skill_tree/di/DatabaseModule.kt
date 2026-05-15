@@ -2,6 +2,7 @@ package com.fancy.skill_tree.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase.JournalMode
 import com.fancy.skill_tree.core.data.database.AppDatabase
 import com.fancy.skill_tree.core.data.database.dao.AttachmentDao
 import com.fancy.skill_tree.core.data.database.dao.NodeLinkDao
@@ -13,6 +14,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 /**
@@ -33,6 +35,8 @@ object DatabaseModule {
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME
         )
+            .setJournalMode(JournalMode.WRITE_AHEAD_LOGGING)
+            .setQueryExecutor(Executors.newFixedThreadPool(4))
             .fallbackToDestructiveMigration()
             .build()
     }

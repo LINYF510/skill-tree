@@ -20,7 +20,12 @@ import java.util.UUID
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index("parentId")]
+    indices = [
+        Index("parentId"),
+        Index("nodeType"),
+        Index("title"),
+        Index("createdAt")
+    ]
 )
 data class SkillNodeEntity(
     @PrimaryKey

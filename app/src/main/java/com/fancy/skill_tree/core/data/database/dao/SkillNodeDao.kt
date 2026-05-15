@@ -34,8 +34,23 @@ interface SkillNodeDao {
     @Query("SELECT * FROM skill_node WHERE nodeType = :nodeType")
     fun getNodesByType(nodeType: String): Flow<List<SkillNodeEntity>>
 
-    @Query("SELECT * FROM skill_node WHERE title LIKE '%' || :keyword || '%' OR content LIKE '%' || :keyword || '%'")
-    fun searchNodes(keyword: String): Flow<List<SkillNodeEntity>>
+    @Query("""
+        SELECT * FROM skill_node 
+        WHERE title LIKE '%' || :keyword || '%' 
+           OR content LIKE '%' || :keyword || '%' 
+        ORDER BY 
+            CASE WHEN title LIKE '%' || :keyword || '%' THEN 0 ELSE 1 END,
+            sortOrder ASC
+    """)
+    fun searchFullText(keyword: String): Flow<List<SkillNodeEntity>>
+
+    @Query("""
+        SELECT DISTINCT sn.* FROM skill_node sn
+        INNER JOIN node_tag nt ON sn.id = nt.nodeId
+        WHERE nt.tagId IN (:tagIds)
+        ORDER BY sn.sortOrder ASC
+    """)
+    fun searchByTags(tagIds: List<String>): Flow<List<SkillNodeEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNode(node: SkillNodeEntity)
@@ -60,4 +75,7 @@ interface SkillNodeDao {
 
     @Query("SELECT MAX(level) FROM skill_node")
     fun getMaxDepth(): Flow<Int?>
+
+    @Query("DELETE FROM skill_node")
+    suspend fun deleteAllNodes()
 }
