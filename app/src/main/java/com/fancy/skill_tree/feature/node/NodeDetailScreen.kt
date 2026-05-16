@@ -51,6 +51,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fancy.skill_tree.R
 import com.fancy.skill_tree.core.ui.accessibility.accessibilityButton
@@ -59,6 +61,8 @@ import com.fancy.skill_tree.core.ui.components.AddAttachmentDialog
 import com.fancy.skill_tree.core.ui.components.AddLinkDialog
 import com.fancy.skill_tree.core.ui.components.AddTagDialog
 import com.fancy.skill_tree.core.ui.components.AttachmentsSection
+import com.fancy.skill_tree.core.ui.components.CameraPermissionHandler
+import com.fancy.skill_tree.core.ui.components.CameraPermissionState
 import com.fancy.skill_tree.core.ui.components.ImageViewerDialog
 import com.fancy.skill_tree.core.ui.components.LinkedNodesSection
 import com.fancy.skill_tree.core.ui.components.NodeTagsSection
@@ -114,6 +118,8 @@ fun NodeDetailScreen(
     var showAddAttachmentDialog by remember { mutableStateOf(false) }
     var showImageViewer by remember { mutableStateOf(false) }
     var currentViewingAttachmentPath by remember { mutableStateOf<String?>(null) }
+    var showCameraScreen by remember { mutableStateOf(false) }
+    var requestCameraPermission by remember { mutableStateOf(false) }
 
     val pickFileLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -195,6 +201,7 @@ fun NodeDetailScreen(
             onDismiss = { showAddAttachmentDialog = false },
             onTakePhoto = {
                 showAddAttachmentDialog = false
+                requestCameraPermission = true
             },
             onPickFromGallery = {
                 pickImageLauncher.launch(
@@ -217,6 +224,43 @@ fun NodeDetailScreen(
                 onDismiss = {
                     showImageViewer = false
                     currentViewingAttachmentPath = null
+                }
+            )
+        }
+    }
+
+    if (requestCameraPermission) {
+        CameraPermissionHandler(
+            onPermissionResult = { state ->
+                requestCameraPermission = false
+                when (state) {
+                    CameraPermissionState.GRANTED -> {
+                        showCameraScreen = true
+                    }
+                    CameraPermissionState.DENIED,
+                    CameraPermissionState.PERMANENTLY_DENIED -> { }
+                }
+            },
+            content = { }
+        )
+    }
+
+    if (showCameraScreen) {
+        Dialog(
+            onDismissRequest = { showCameraScreen = false },
+            properties = DialogProperties(usePlatformDefaultWidth = false)
+        ) {
+            CameraScreen(
+                onPhotoCaptured = { uri ->
+                    showCameraScreen = false
+                    val (fileName, mimeType, fileSize) = getFileInfo(context, uri)
+                    viewModel.addAttachment(uri, fileName, mimeType, fileSize)
+                },
+                onError = { _ ->
+                    showCameraScreen = false
+                },
+                onDismiss = {
+                    showCameraScreen = false
                 }
             )
         }

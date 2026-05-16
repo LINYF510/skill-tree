@@ -63,9 +63,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.fancy.skill_tree.core.domain.model.NodeLevelConfig
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -103,6 +105,7 @@ import com.fancy.skill_tree.core.domain.entity.TagEntity
 import com.fancy.skill_tree.core.domain.model.Achievement
 import com.fancy.skill_tree.core.ui.animation.AnimationConfig
 import com.fancy.skill_tree.core.ui.animation.AnimationParams
+import com.fancy.skill_tree.core.ui.animation.ParticleSystem
 import com.fancy.skill_tree.core.ui.render.TreeLayoutCache
 import com.fancy.skill_tree.core.ui.render.TextMeasureCache
 import com.fancy.skill_tree.core.ui.render.ConnectionPathCache
@@ -182,6 +185,42 @@ fun SkillTreeScreen(
 
     val creationScale = remember { Animatable(1f) }
     val growthProgress = remember { Animatable(100f) }
+
+    // 粒子系统状态
+    val particleSystems = remember { mutableStateMapOf<String, ParticleSystem>() }
+
+    // 节点解锁动画状态
+    val unlockingNodeId = remember { mutableStateOf<String?>(null) }
+    val unlockProgress = remember { Animatable(0f) }
+
+    // 节点等级追踪（用于检测升级）
+    val previousNodeLevels = remember { mutableStateMapOf<String, Int>() }
+
+    // 性能监控：检测低端设备并自动禁用粒子
+    val frameTimeHistory = remember { mutableListOf<Long>() }
+    var lastFrameTime by remember { mutableStateOf(0L) }
+
+    LaunchedEffect(Unit) {
+        if (AnimationConfig.areParticlesEnabled) {
+            while (true) {
+                val currentTime = System.currentTimeMillis()
+                if (lastFrameTime > 0) {
+                    val frameTime = currentTime - lastFrameTime
+                    frameTimeHistory.add(frameTime)
+                    if (frameTimeHistory.size > 10) {
+                        frameTimeHistory.removeAt(0)
+                    }
+                    // 连续 10 帧低于 30fps (帧时间 > 33ms) 时禁用粒子
+                    if (frameTimeHistory.size >= 10 && frameTimeHistory.all { it > 33 }) {
+                        AnimationConfig.areParticlesEnabled = false
+                        frameTimeHistory.clear()
+                    }
+                }
+                lastFrameTime = currentTime
+                delay(16) // 约 60fps 采样
+            }
+        }
+    }
 
     val infiniteTransition = rememberInfiniteTransition(label = "tree_animations")
     val searchPulseAlpha by infiniteTransition.animateFloat(
@@ -334,7 +373,27 @@ fun SkillTreeScreen(
                         val currentNodeIds = uiState.nodes.map { it.id }.toSet()
                         val newIds = currentNodeIds - previousNodeIds
                         if (hasPlayedGrowthAnimation && previousNodeIds.isNotEmpty() && newIds.isNotEmpty()) {
-                            newlyCreatedNodeId = newIds.first()
+                            val newNodeId = newIds.first()
+                            newlyCreatedNodeId = newNodeId
+
+                            // 在节点位置发射粒子
+                            if (AnimationConfig.areParticlesEnabled && canvasSize.width > 0f) {
+                                val newNodePos = layoutCache.getOrComputePositions(
+                                    treeNodes, canvasSize.width, canvasSize.height
+                                ) { t, w, h -> calculateNodePositions(t, w, h) }
+                                    .find { it.nodeId == newNodeId }
+                                if (newNodePos != null) {
+                                    val system = ParticleSystem(
+                                        centerX = newNodePos.x,
+                                        centerY = newNodePos.y,
+                                        particleCount = AnimationConfig.PARTICLE_COUNT,
+                                        colors = listOf(colors.primary, colors.ability, colors.resource)
+                                    )
+                                    system.emit()
+                                    particleSystems[newNodePos.nodeId] = system
+                                }
+                            }
+
                             creationScale.snapTo(0f)
                             creationScale.animateTo(
                                 1f,
@@ -349,6 +408,64 @@ fun SkillTreeScreen(
                         previousNodeIds = currentNodeIds
                     }
 
+                    // 节点升级解锁动画：检测等级变化
+                    LaunchedEffect(uiState.nodes) {
+                        uiState.nodes.forEach { node ->
+                            val prevLevel = previousNodeLevels[node.id]
+                            if (prevLevel != null && node.level > prevLevel) {
+                                // 触发解锁动画
+                                unlockingNodeId.value = node.id
+                                unlockProgress.snapTo(0f)
+                                unlockProgress.animateTo(
+                                    targetValue = 1f,
+                                    animationSpec = tween(AnimationConfig.NODE_UNLOCK_DURATION)
+                                )
+
+                                // 同时发射粒子（升级时粒子数量翻倍）
+                                if (AnimationConfig.areParticlesEnabled && canvasSize.width > 0f) {
+                                    val nodePos = layoutCache.getOrComputePositions(
+                                        treeNodes, canvasSize.width, canvasSize.height
+                                    ) { t, w, h -> calculateNodePositions(t, w, h) }
+                                        .find { it.nodeId == node.id }
+                                    if (nodePos != null) {
+                                        val levelConfig = NodeLevelConfig.forLevel(node.level)
+                                        val glowColorInt = (levelConfig.glowColor and 0xFFFFFF).toInt()
+                                        val system = ParticleSystem(
+                                            centerX = nodePos.x,
+                                            centerY = nodePos.y,
+                                            particleCount = AnimationConfig.PARTICLE_COUNT * 2,
+                                            colors = listOf(
+                                                Color(0xFF000000.toInt() or glowColorInt),
+                                                colors.primary
+                                            )
+                                        )
+                                        system.emit()
+                                        particleSystems[node.id] = system
+                                    }
+                                }
+
+                                unlockingNodeId.value = null
+                                unlockProgress.snapTo(0f)
+                            }
+                            previousNodeLevels[node.id] = node.level
+                        }
+                    }
+
+                    // 驱动粒子动画更新循环
+                    LaunchedEffect(particleSystems.toMap()) {
+                        if (particleSystems.isEmpty()) return@LaunchedEffect
+                        while (particleSystems.isNotEmpty()) {
+                            val deadKeys = mutableListOf<String>()
+                            particleSystems.forEach { (key, system) ->
+                                if (!system.update(deltaTime = 1f / 60f)) {
+                                    deadKeys.add(key)
+                                }
+                            }
+                            deadKeys.forEach { particleSystems.remove(it) }
+                            delay(16) // 约 60fps
+                        }
+                    }
+
                     val currentAnimationParams = AnimationParams(
                         newlyCreatedNodeId = newlyCreatedNodeId,
                         creationScale = creationScale.value,
@@ -356,7 +473,10 @@ fun SkillTreeScreen(
                         searchPulseAlpha = if (uiState.searchQuery.isNotBlank()) searchPulseAlpha else 0f,
                         selectedPulseAlpha = if (uiState.selectedNodeId != null) selectedPulseAlpha else 0f,
                         selectedNodeId = uiState.selectedNodeId,
-                        isSearchActive = uiState.searchQuery.isNotBlank()
+                        isSearchActive = uiState.searchQuery.isNotBlank(),
+                        unlockingNodeId = unlockingNodeId.value,
+                        unlockProgress = unlockProgress.value,
+                        particleSystems = particleSystems.toMap()
                     )
 
                     Column(modifier = Modifier.fillMaxSize()) {
@@ -610,6 +730,14 @@ fun SkillTreeScreen(
                                         visibleNodeIds,
                                         colors
                                     )
+                                    // 绘制粒子特效（在节点之上）
+                                    if (AnimationConfig.areParticlesEnabled) {
+                                        drawParticles(
+                                            particleSystems = currentAnimationParams.particleSystems,
+                                            positionMap = nodePositions.associateBy { it.nodeId },
+                                            themeColors = colors
+                                        )
+                                    }
                                 }
                             }
 
@@ -1149,6 +1277,31 @@ private fun DrawScope.drawConnections(
     treeNodes.forEach { drawNodeConnections(it, 0) }
 }
 
+/**
+ * 绘制粒子特效
+ *
+ * @param particleSystems 粒子系统映射表
+ * @param positionMap 节点位置映射表
+ * @param themeColors 主题颜色
+ */
+private fun DrawScope.drawParticles(
+    particleSystems: Map<String, ParticleSystem>,
+    positionMap: Map<String, NodePosition>,
+    themeColors: ThemeColors
+) {
+    particleSystems.forEach { (nodeId, system) ->
+        system.particles.forEach { particle ->
+            if (particle.alpha > 0.01f) {
+                drawCircle(
+                    color = particle.color.copy(alpha = particle.alpha),
+                    radius = particle.radius,
+                    center = Offset(particle.x, particle.y)
+                )
+            }
+        }
+    }
+}
+
 private fun DrawScope.drawNodes(
     treeNodes: List<TreeNode>,
     positions: List<NodePosition>,
@@ -1217,6 +1370,17 @@ private fun DrawScope.drawNodes(
 
         val scaledWidth = NODE_WIDTH * combinedScale
         val scaledHeight = NODE_HEIGHT * combinedScale
+
+        // 节点解锁光效
+        if (node.entity.id == animationParams.unlockingNodeId && animationParams.unlockProgress > 0f) {
+            val glowRadius = AnimationConfig.NODE_UNLOCK_GLOW_MAX_RADIUS * animationParams.unlockProgress
+            val glowAlpha = (1f - animationParams.unlockProgress) * 0.6f
+            drawCircle(
+                color = nodeColor.copy(alpha = glowAlpha),
+                radius = scaledWidth / 2 + glowRadius,
+                center = Offset(drawX, drawY)
+            )
+        }
 
         // 选中节点脉冲光晕
         if (isSelected && combinedAlpha > 0.5f) {

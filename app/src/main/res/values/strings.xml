@@ -325,4 +325,15 @@
     <string name="a11y_node_has_content">, has content</string>
     <string name="a11y_state_click_detail">Tap to view details</string>
     <string name="a11y_state_long_press_menu">, long press for options</string>
+
+    <!-- Camera -->
+    <string name="camera_permission_title">Camera Access</string>
+    <string name="camera_permission_message">Camera access is required to take photos for attachments.</string>
+    <string name="camera_permission_denied">Camera permission denied. You can enable it in Settings.</string>
+    <string name="camera_capture_button">Capture</string>
+    <string name="camera_switch_button">Switch Camera</string>
+    <string name="camera_error">Camera initialization failed</string>
+    <string name="camera_rationale_title">Permission Required</string>
+    <string name="camera_rationale_message">Camera permission is needed to take photos for attachments. Please grant the permission.</string>
+    <string name="camera_go_to_settings">Go to Settings</string>
 </resources>

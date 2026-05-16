@@ -325,4 +325,15 @@
     <string name="a11y_node_has_content">，有详细内容</string>
     <string name="a11y_state_click_detail">点击查看详情</string>
     <string name="a11y_state_long_press_menu">，长按显示操作菜单</string>
+
+    <!-- 相机 -->
+    <string name="camera_permission_title">相机权限</string>
+    <string name="camera_permission_message">需要相机权限才能拍照添加附件。</string>
+    <string name="camera_permission_denied">相机权限被拒绝，可在设置中开启。</string>
+    <string name="camera_capture_button">拍照</string>
+    <string name="camera_switch_button">切换镜头</string>
+    <string name="camera_error">相机初始化失败</string>
+    <string name="camera_rationale_title">需要权限</string>
+    <string name="camera_rationale_message">需要相机权限才能拍照添加附件，请授予权限。</string>
+    <string name="camera_go_to_settings">前往设置</string>
 </resources>
