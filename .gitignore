@@ -29,3 +29,9 @@ app/build/
 
 # Secrets
 *.env
+
+# Documentation (internal)
+doc/
+prd/
+CLAUDE.md
+PRD.lnk
