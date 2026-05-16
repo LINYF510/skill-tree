@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase.JournalMode
 import com.fancy.skill_tree.core.data.database.AppDatabase
+import com.fancy.skill_tree.core.data.database.DatabaseRecoveryManager
 import com.fancy.skill_tree.core.data.database.MigrationManager
 import com.fancy.skill_tree.core.data.database.dao.AttachmentDao
 import com.fancy.skill_tree.core.data.database.dao.NodeLinkDao
@@ -70,5 +71,13 @@ object DatabaseModule {
     @Singleton
     fun provideAttachmentDao(database: AppDatabase): AttachmentDao {
         return database.attachmentDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseRecoveryManager(
+        @ApplicationContext context: Context
+    ): DatabaseRecoveryManager {
+        return DatabaseRecoveryManager(context)
     }
 }

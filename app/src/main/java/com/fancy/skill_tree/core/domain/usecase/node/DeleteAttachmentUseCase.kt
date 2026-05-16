@@ -22,7 +22,7 @@ class DeleteAttachmentUseCase @Inject constructor(
         return try {
             // 先获取附件信息以删除文件
             val attachment = repository.getAttachmentById(attachmentId)
-            attachment?.filePath?.let { filePath ->
+            attachment?.filePath?.takeIf { it.isNotBlank() }?.let { filePath ->
                 fileManager.deleteFile(filePath)
             }
             repository.deleteAttachment(attachmentId)
