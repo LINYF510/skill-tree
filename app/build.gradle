@@ -7,6 +7,11 @@ plugins {
     id 'com.google.devtools.ksp'
 }
 
+def keystoreFilePath = System.getenv("KEYSTORE_FILE")
+def keystorePwd = System.getenv("KEYSTORE_PASSWORD")
+def keyAliasName = System.getenv("KEY_ALIAS")
+def keyPwd = System.getenv("KEY_PASSWORD")
+
 android {
     namespace 'com.fancy.skill_tree'
     compileSdk 35
@@ -25,10 +30,25 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            if (keystoreFilePath != null) {
+                storeFile file(keystoreFilePath)
+                storePassword keystorePwd
+                keyAlias keyAliasName
+                keyPassword keyPwd
+            }
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (keystoreFilePath != null) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 

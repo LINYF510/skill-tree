@@ -14,3 +14,18 @@
 .cxx
 local.properties
 /.trae/*
+
+# Signing
+*.jks
+*.keystore
+release.keystore
+
+# Build outputs
+app/build/
+*/build/
+
+# Kotlin
+.kotlin/
+
+# Secrets
+*.env
