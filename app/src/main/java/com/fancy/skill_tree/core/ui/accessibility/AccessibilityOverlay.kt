@@ -19,6 +19,8 @@ import com.fancy.skill_tree.R
 import com.fancy.skill_tree.feature.tree.NodePosition
 import com.fancy.skill_tree.feature.tree.TreeNode
 
+private const val MAX_ACCESSIBILITY_NODES = 50
+
 /**
  * Canvas 无障碍语义代理层
  * 在 Canvas 上方叠加透明可点击区域，使 TalkBack 能感知节点
@@ -51,8 +53,14 @@ fun AccessibilityOverlay(
     val density = LocalDensity.current
     val context = LocalContext.current
 
+    val nodesToRender = if (visibleNodeIds.isNotEmpty()) {
+        treeNodes.filter { it.entity.id in visibleNodeIds }.take(MAX_ACCESSIBILITY_NODES)
+    } else {
+        treeNodes.take(MAX_ACCESSIBILITY_NODES)
+    }
+
     Box(modifier = Modifier) {
-        treeNodes.forEach { node ->
+        nodesToRender.forEach { node ->
             val pos = positionMap[node.entity.id] ?: return@forEach
 
             if (visibleNodeIds.isNotEmpty() && node.entity.id !in visibleNodeIds) return@forEach

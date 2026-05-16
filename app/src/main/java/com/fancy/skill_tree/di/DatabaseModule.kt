@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase.JournalMode
 import com.fancy.skill_tree.core.data.database.AppDatabase
+import com.fancy.skill_tree.core.data.database.MigrationManager
 import com.fancy.skill_tree.core.data.database.dao.AttachmentDao
 import com.fancy.skill_tree.core.data.database.dao.NodeLinkDao
 import com.fancy.skill_tree.core.data.database.dao.NodeTagDao
@@ -37,7 +38,7 @@ object DatabaseModule {
         )
             .setJournalMode(JournalMode.WRITE_AHEAD_LOGGING)
             .setQueryExecutor(Executors.newFixedThreadPool(4))
-            .fallbackToDestructiveMigration()
+            .addMigrations(*MigrationManager.ALL_MIGRATIONS.toTypedArray())
             .build()
     }
 

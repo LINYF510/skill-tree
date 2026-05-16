@@ -90,6 +90,7 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.1.1"
 
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
 
     testImplementation libs.junit5.api
     testRuntimeOnly libs.junit5.engine

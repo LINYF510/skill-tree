@@ -241,4 +241,14 @@ interface SkillTreeRepository {
      * @return 匹配的节点列表 Flow
      */
     fun searchByTags(tagIds: List<String>): Flow<List<SkillNodeEntity>>
+
+    /**
+     * 获取已确认的 AI 推荐链接数量
+     */
+    suspend fun getConfirmedAiLinkCount(): Int
+
+    /**
+     * 获取图片类型附件数量
+     */
+    suspend fun getImageAttachmentCount(): Int
 }

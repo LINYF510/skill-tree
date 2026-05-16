@@ -14,6 +14,7 @@ import java.util.UUID
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -233,5 +234,17 @@ class SkillTreeRepositoryImpl @Inject constructor(
     override fun searchByTags(tagIds: List<String>): Flow<List<SkillNodeEntity>> {
         return skillNodeDao.searchByTags(tagIds)
             .catch { e -> throw if (e is DataException) e else DataException.DatabaseError(e) }
+    }
+
+    override suspend fun getConfirmedAiLinkCount(): Int {
+        return safeDbCall {
+            nodeLinkDao.getConfirmedAiLinkCount().first()
+        }.getOrDefault(0)
+    }
+
+    override suspend fun getImageAttachmentCount(): Int {
+        return safeDbCall {
+            attachmentDao.getAttachmentsByMimeType("image/").first().size
+        }.getOrDefault(0)
     }
 }

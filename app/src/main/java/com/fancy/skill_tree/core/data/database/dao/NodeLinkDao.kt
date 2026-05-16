@@ -55,4 +55,10 @@ interface NodeLinkDao {
 
     @Query("SELECT COUNT(*) FROM node_link WHERE linkType = 'AI_SUGGESTED'")
     fun getAiSuggestedLinkCount(): Flow<Int>
+
+    /**
+     * 获取已确认的 AI 推荐链接数量
+     */
+    @Query("SELECT COUNT(*) FROM node_link WHERE linkType = 'AI_SUGGESTED' AND confirmed = 1")
+    fun getConfirmedAiLinkCount(): Flow<Int>
 }

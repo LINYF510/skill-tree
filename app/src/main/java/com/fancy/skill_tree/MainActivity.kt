@@ -41,6 +41,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.fancy.skill_tree.core.data.preferences.LocaleManager
 import com.fancy.skill_tree.core.data.preferences.UserPreferences
 import com.fancy.skill_tree.core.ui.animation.AnimationConfig
@@ -74,6 +75,7 @@ class MainActivity : ComponentActivity() {
     lateinit var localeManager: LocaleManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {

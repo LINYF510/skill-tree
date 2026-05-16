@@ -38,5 +38,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         const val DATABASE_NAME = "skill_tree.db"
+        const val DATABASE_VERSION = 1
     }
 }

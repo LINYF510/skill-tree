@@ -54,8 +54,17 @@ class CheckAchievementsUseCase @Inject constructor(
         checkAndUnlock(Achievement.FIVE_LEVEL5, level5Count >= 5, newAchievements)
         checkAndUnlock(Achievement.TREE_DEPTH_5, maxDepth >= 5, newAchievements)
 
-        // 以下成就需要额外实现：语音输入计数、AI 确认计数、图片计数、连续天数
-        // 暂时跳过，后续补充
+        val confirmedAiLinks = repository.getConfirmedAiLinkCount()
+        checkAndUnlock(Achievement.TEN_AI_CONFIRMS, confirmedAiLinks >= 10, newAchievements)
+
+        val voiceCount = achievementManager.getVoiceInputCount()
+        checkAndUnlock(Achievement.TEN_VOICE, voiceCount >= 10, newAchievements)
+
+        val imageCount = repository.getImageAttachmentCount()
+        checkAndUnlock(Achievement.TWENTY_IMAGES, imageCount >= 20, newAchievements)
+
+        val dailyStreak = achievementManager.updateDailyStreak()
+        checkAndUnlock(Achievement.DAILY_STREAK_7, dailyStreak >= 7, newAchievements)
 
         return newAchievements
     }
