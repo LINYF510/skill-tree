@@ -1,5 +1,6 @@
 package com.fancy.skill_tree.ui.theme
 
+import androidx.compose.material3.ColorScheme
 import androidx.compose.ui.graphics.Color
 
 /**
@@ -38,9 +39,9 @@ object LightColors {
 
 /**
  * 主题模式枚举
- * DARK - 始终暗色, LIGHT - 始终亮色, SYSTEM - 跟随系统
+ * DARK - 始终暗色, LIGHT - 始终亮色, SYSTEM - 跟随系统, DYNAMIC - Material You 动态颜色 (API 31+)
  */
-enum class ThemeMode { DARK, LIGHT, SYSTEM }
+enum class ThemeMode { DARK, LIGHT, SYSTEM, DYNAMIC }
 
 /**
  * 统一配色数据类
@@ -79,6 +80,29 @@ data class ThemeColors(
             LightColors.Ai, LightColors.TextPrimary, LightColors.TextSecondary,
             LightColors.Error, LightColors.Warning
         )
+
+        /**
+         * 从 Material3 ColorScheme 创建 ThemeColors（用于 Material You 动态颜色）
+         *
+         * @param colorScheme Material3 颜色方案
+         * @param isDark 是否为暗色模式
+         * @return 从 ColorScheme 提取的 ThemeColors
+         */
+        fun fromDynamicColorScheme(colorScheme: ColorScheme, isDark: Boolean): ThemeColors {
+            return ThemeColors(
+                background = colorScheme.background,
+                surface = colorScheme.surface,
+                primary = colorScheme.primary,
+                ability = colorScheme.secondary,
+                resource = colorScheme.tertiary,
+                link = colorScheme.primary.copy(alpha = 0.7f),
+                ai = colorScheme.primaryContainer,
+                textPrimary = colorScheme.onBackground,
+                textSecondary = colorScheme.onSurfaceVariant,
+                error = colorScheme.error,
+                warning = if (isDark) Color(0xFFD29922) else Color(0xFF9A6700)
+            )
+        }
     }
 }
 
@@ -90,12 +114,12 @@ data class ThemeColors(
  * @return 当前主题配色
  */
 fun getThemeColors(mode: ThemeMode, isSystemDark: Boolean): ThemeColors {
-    val isDark = when (mode) {
-        ThemeMode.DARK -> true
-        ThemeMode.LIGHT -> false
-        ThemeMode.SYSTEM -> isSystemDark
+    return when (mode) {
+        ThemeMode.DARK -> ThemeColors.fromDark()
+        ThemeMode.LIGHT -> ThemeColors.fromLight()
+        ThemeMode.SYSTEM -> if (isSystemDark) ThemeColors.fromDark() else ThemeColors.fromLight()
+        ThemeMode.DYNAMIC -> if (isSystemDark) ThemeColors.fromDark() else ThemeColors.fromLight()
     }
-    return if (isDark) ThemeColors.fromDark() else ThemeColors.fromLight()
 }
 
 @Deprecated("使用 LocalThemeColors.current.background", ReplaceWith("LocalThemeColors.current.background"))

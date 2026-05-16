@@ -1,10 +1,13 @@
 package com.fancy.skill_tree.feature.settings
 
+import android.app.Activity
+import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,23 +33,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fancy.skill_tree.R
 import com.fancy.skill_tree.core.data.preferences.LocaleManager
-import com.fancy.skill_tree.core.data.preferences.UserPreferences
-import com.fancy.skill_tree.core.ui.accessibility.accessibilityButton
-import com.fancy.skill_tree.core.ui.accessibility.accessibilityLabel
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import com.fancy.skill_tree.ui.theme.LocalThemeColors
-import com.fancy.skill_tree.ui.theme.ThemeMode
 import com.fancy.skill_tree.ui.theme.ThemeColors
-import android.app.Activity
-import javax.inject.Inject
+import com.fancy.skill_tree.ui.theme.ThemeMode
 
 /**
  * 设置页 Screen
@@ -274,6 +271,15 @@ private fun ThemeSelectionDialog(
                     onClick = { onModeSelected(ThemeMode.SYSTEM) },
                     colors = colors
                 )
+                // 仅在 API 31+ 设备上显示动态颜色选项
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    ThemeOption(
+                        label = stringResource(R.string.settings_theme_dynamic),
+                        selected = currentMode == ThemeMode.DYNAMIC,
+                        onClick = { onModeSelected(ThemeMode.DYNAMIC) },
+                        colors = colors
+                    )
+                }
             }
         },
         confirmButton = {

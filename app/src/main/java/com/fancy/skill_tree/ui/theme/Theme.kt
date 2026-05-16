@@ -1,15 +1,19 @@
 package com.fancy.skill_tree.ui.theme
 
 import android.app.Activity
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -54,8 +58,9 @@ private val LightColorScheme = lightColorScheme(
 /**
  * 主题 Composable
  * 自动根据 ThemeMode 选择暗色/亮色主题
+ * 支持 Material You 动态颜色（API 31+）
  *
- * @param themeMode 主题模式（DARK/LIGHT/SYSTEM）
+ * @param themeMode 主题模式（DARK/LIGHT/SYSTEM/DYNAMIC）
  * @param content 主题包裹的内容
  */
 @Composable
@@ -64,14 +69,36 @@ fun SkilltreeTheme(
     content: @Composable () -> Unit
 ) {
     val isSystemDark = isSystemInDarkTheme()
-    val isDark = when (themeMode) {
+    val context = LocalContext.current
+    val supportsDynamic = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
+    // 处理低版本设备回退
+    val effectiveMode = if (themeMode == ThemeMode.DYNAMIC && !supportsDynamic) {
+        ThemeMode.SYSTEM
+    } else {
+        themeMode
+    }
+
+    val isDark = when (effectiveMode) {
         ThemeMode.DARK -> true
         ThemeMode.LIGHT -> false
         ThemeMode.SYSTEM -> isSystemDark
+        ThemeMode.DYNAMIC -> isSystemDark
     }
 
-    val colorScheme = if (isDark) DarkColorScheme else LightColorScheme
-    val themeColors = getThemeColors(themeMode, isSystemDark)
+    val colorScheme = when {
+        effectiveMode == ThemeMode.DYNAMIC && supportsDynamic -> {
+            if (isDark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+        isDark -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    val themeColors = if (effectiveMode == ThemeMode.DYNAMIC && supportsDynamic) {
+        ThemeColors.fromDynamicColorScheme(colorScheme, isDark)
+    } else {
+        getThemeColors(effectiveMode, isSystemDark)
+    }
 
     val view = LocalView.current
     if (!view.isInEditMode) {

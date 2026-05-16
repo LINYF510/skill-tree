@@ -109,6 +109,7 @@
     <string name="settings_theme_dark">暗色模式</string>
     <string name="settings_theme_light">亮色模式</string>
     <string name="settings_theme_system">跟随系统</string>
+    <string name="settings_theme_dynamic">动态颜色</string>
     <string name="settings_language">语言</string>
     <string name="settings_language_desc">切换应用语言</string>
     <string name="settings_language_zh">中文</string>

@@ -109,6 +109,7 @@
     <string name="settings_theme_dark">Dark Mode</string>
     <string name="settings_theme_light">Light Mode</string>
     <string name="settings_theme_system">Follow System</string>
+    <string name="settings_theme_dynamic">Dynamic Color</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Switch app language</string>
     <string name="settings_language_zh">中文</string>
