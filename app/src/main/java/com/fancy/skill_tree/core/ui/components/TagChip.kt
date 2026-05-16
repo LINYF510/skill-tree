@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.fancy.skill_tree.R
 import com.fancy.skill_tree.core.domain.entity.TagEntity
 import com.fancy.skill_tree.core.ui.accessibility.accessibilityButton
 import com.fancy.skill_tree.ui.theme.LocalThemeColors
@@ -59,7 +61,7 @@ fun TagChip(
     Row(
         modifier = modifier
             .background(backgroundColor, shape = RoundedCornerShape(16.dp))
-            .accessibilityButton("标签：${tag.name}${if (onRemove != null) "，点击移除" else ""}")
+            .accessibilityButton("${stringResource(R.string.a11y_tag_label, tag.name)}${if (onRemove != null) "，${stringResource(R.string.a11y_tag_tap_remove)}" else ""}")
             .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
             .padding(horizontal = 12.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,

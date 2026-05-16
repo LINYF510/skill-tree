@@ -239,7 +239,7 @@ private fun AchievementItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .accessibilityLabel("${achievement.title}: ${achievement.description}${if (isUnlocked) "，已解锁" else "，未解锁"}")
+            .accessibilityLabel("${stringResource(achievement.titleResId)}: ${stringResource(achievement.descriptionResId)}${if (isUnlocked) "，${stringResource(R.string.a11y_unlocked)}" else "，${stringResource(R.string.a11y_locked)}"}")
             .background(
                 if (isUnlocked) Color(0x20FFD700) else Color(0x10808080),
                 shape = RoundedCornerShape(8.dp)
@@ -255,13 +255,13 @@ private fun AchievementItem(
 
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = achievement.title,
+                text = stringResource(achievement.titleResId),
                 color = if (isUnlocked) colors.textPrimary else colors.textSecondary,
                 fontSize = 14.sp,
                 fontWeight = if (isUnlocked) FontWeight.SemiBold else FontWeight.Normal
             )
             Text(
-                text = achievement.description,
+                text = stringResource(achievement.descriptionResId),
                 color = colors.textSecondary,
                 fontSize = 12.sp,
                 maxLines = 1
@@ -336,7 +336,7 @@ private fun ProgressSection(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .accessibilityLabel("$title: 能力 $abilityCount, 物质 $resourceCount, 总计 $totalCount")
+            .accessibilityLabel("$title: ${stringResource(R.string.stats_ability_label)} $abilityCount, ${stringResource(R.string.stats_resource_label)} $resourceCount, ${stringResource(R.string.stats_total_label)} $totalCount")
             .background(colors.surface, shape = RoundedCornerShape(12.dp))
             .padding(16.dp)
     ) {

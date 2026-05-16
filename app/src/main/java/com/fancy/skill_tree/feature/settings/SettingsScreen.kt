@@ -126,7 +126,7 @@ fun SettingsScreen(
                     textColor = MaterialTheme.colorScheme.error,
                     onClick = { showClearDataDialog = true },
                     colors = colors,
-                    accessibilityHint = "危险操作"
+                    accessibilityHint = stringResource(R.string.settings_danger_zone)
                 )
             }
 

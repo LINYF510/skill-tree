@@ -35,7 +35,7 @@ class AttachmentFileManager @Inject constructor(
             destFile.outputStream().use { output ->
                 input.copyTo(output)
             }
-        } ?: throw IOException("无法打开文件: $sourceUri")
+        } ?: throw IOException("Unable to open file: $sourceUri")
 
         return destFile.absolutePath
     }

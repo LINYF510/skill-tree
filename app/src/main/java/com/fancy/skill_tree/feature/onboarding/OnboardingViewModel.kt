@@ -1,5 +1,6 @@
 package com.fancy.skill_tree.feature.onboarding
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fancy.skill_tree.core.domain.usecase.node.CreateNodeUseCase
@@ -14,6 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
+    private val application: Application,
     private val onboardingManager: OnboardingManager,
     private val loadSampleDataUseCase: LoadSampleDataUseCase,
     private val createNodeUseCase: CreateNodeUseCase
@@ -30,7 +32,7 @@ class OnboardingViewModel @Inject constructor(
 
     fun skip() {
         viewModelScope.launch {
-            loadSampleDataUseCase()
+            loadSampleDataUseCase(application)
             onboardingManager.completeOnboarding()
         }
     }
@@ -38,9 +40,8 @@ class OnboardingViewModel @Inject constructor(
     fun finish(keepSample: Boolean) {
         viewModelScope.launch {
             if (!keepSample) {
-                // 清理示例数据（这里先简化处理）
             } else {
-                loadSampleDataUseCase()
+                loadSampleDataUseCase(application)
             }
             onboardingManager.completeOnboarding()
         }

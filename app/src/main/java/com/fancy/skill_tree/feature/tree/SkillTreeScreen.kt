@@ -1406,18 +1406,18 @@ private fun AchievementNotification(
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = achievement.title,
+                                text = stringResource(achievement.titleResId),
                                 color = colors.textPrimary,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Medium
                             )
                             Text(
-                                text = achievement.description,
+                                text = stringResource(achievement.descriptionResId),
                                 color = colors.textSecondary,
                                 fontSize = 13.sp
                             )
                             Text(
-                                text = stringResource(R.string.achievement_reward, achievement.reward),
+                                text = stringResource(R.string.achievement_reward, stringResource(achievement.rewardResId)),
                                 color = colors.primary,
                                 fontSize = 12.sp
                             )

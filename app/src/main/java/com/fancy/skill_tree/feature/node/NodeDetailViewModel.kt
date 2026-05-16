@@ -65,7 +65,7 @@ class NodeDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val nodeId: String = savedStateHandle.get<String>("nodeId")
-        ?: throw IllegalArgumentException("nodeId 不能为空")
+        ?: throw IllegalArgumentException("nodeId must not be null")
 
     private val _uiState = MutableStateFlow(NodeDetailUiState())
     val uiState: StateFlow<NodeDetailUiState> = _uiState.asStateFlow()

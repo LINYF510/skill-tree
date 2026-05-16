@@ -1,6 +1,8 @@
 package com.fancy.skill_tree.feature.tree
 
 import app.cash.turbine.test
+import android.app.Application
+import android.content.Context
 import com.fancy.skill_tree.R
 import com.fancy.skill_tree.core.data.manager.SearchHistoryManager
 import com.fancy.skill_tree.core.domain.common.DomainException
@@ -14,6 +16,7 @@ import com.fancy.skill_tree.core.domain.usecase.node.DeleteNodeUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.ExportToMarkdownUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.GetAllNodesUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.GetAllTagsUseCase
+import com.fancy.skill_tree.core.domain.usecase.node.LoadSampleDataUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.MoveNodeUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.ToggleNodeExpandUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.UpdateNodeUseCase
@@ -54,6 +57,7 @@ class SkillTreeViewModelTest {
     private val deleteNodeUseCase = mockk<DeleteNodeUseCase>()
     private val moveNodeUseCase = mockk<MoveNodeUseCase>()
     private val toggleNodeExpandUseCase = mockk<ToggleNodeExpandUseCase>()
+    private val loadSampleDataUseCase = mockk<LoadSampleDataUseCase>(relaxed = true)
     private val exportToMarkdownUseCase = mockk<ExportToMarkdownUseCase>()
     private val checkAchievementsUseCase = mockk<CheckAchievementsUseCase>()
     private val searchNodesUseCase = mockk<SearchNodesUseCase>()
@@ -316,8 +320,11 @@ class SkillTreeViewModelTest {
         }
     }
 
+    private val application = mockk<Application>(relaxed = true)
+
     private fun createViewModel(): SkillTreeViewModel {
         return SkillTreeViewModel(
+            application = application,
             getAllNodesUseCase = getAllNodesUseCase,
             createNodeUseCase = createNodeUseCase,
             updateNodeUseCase = updateNodeUseCase,
@@ -325,6 +332,7 @@ class SkillTreeViewModelTest {
             moveNodeUseCase = moveNodeUseCase,
             toggleNodeExpandUseCase = toggleNodeExpandUseCase,
             exportToMarkdownUseCase = exportToMarkdownUseCase,
+            loadSampleDataUseCase = loadSampleDataUseCase,
             checkAchievementsUseCase = checkAchievementsUseCase,
             searchNodesUseCase = searchNodesUseCase,
             getAllTagsUseCase = getAllTagsUseCase,

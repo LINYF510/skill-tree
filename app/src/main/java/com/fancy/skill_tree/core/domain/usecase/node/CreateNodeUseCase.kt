@@ -32,7 +32,7 @@ class CreateNodeUseCase @Inject constructor(
         customId: String? = null
     ): Outcome<SkillNodeEntity> {
         if (title.isBlank()) {
-            return Outcome.Error(DomainException.ValidationError("title", "标题不能为空"))
+            return Outcome.Error(DomainException.ValidationError("title", "Title cannot be empty"))
         }
 
         if (nodeType !in listOf("ABILITY", "RESOURCE")) {

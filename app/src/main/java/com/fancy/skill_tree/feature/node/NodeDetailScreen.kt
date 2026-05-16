@@ -295,7 +295,7 @@ fun NodeDetailScreen(
                                             Row(verticalAlignment = Alignment.CenterVertically) {
                                                 Icon(
                                                     Icons.Default.Delete,
-                                                    contentDescription = "删除操作",
+                                                    contentDescription = stringResource(R.string.cd_delete_action),
                                                     tint = androidx.compose.material3.MaterialTheme.colorScheme.error
                                                 )
                                                 Spacer(modifier = Modifier.width(8.dp))
@@ -478,7 +478,7 @@ private fun ContentSection(
                 .clip(RoundedCornerShape(12.dp))
                 .background(colors.surface)
                 .padding(16.dp)
-                .accessibilityLabel("节点内容")
+                .accessibilityLabel(stringResource(R.string.a11y_node_content))
         ) {
             if (content.isNullOrBlank()) {
                 Text(
@@ -519,6 +519,6 @@ private fun MarkdownText(markdown: String) {
         update = { textView ->
             markwon.setMarkdown(textView, markdown)
         },
-        modifier = Modifier.accessibilityLabel("Markdown 内容")
+        modifier = Modifier.accessibilityLabel(stringResource(R.string.a11y_markdown_content))
     )
 }

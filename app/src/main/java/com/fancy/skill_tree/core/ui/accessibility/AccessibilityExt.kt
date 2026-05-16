@@ -51,12 +51,12 @@ fun Modifier.accessibilityButton(label: String, actionLabel: String? = null): Mo
 fun Modifier.accessibilityExpandable(
     isExpanded: Boolean,
     label: String,
-    expandedLabel: String = "已展开",
-    collapsedLabel: String = "已折叠"
+    expandedLabel: String? = null,
+    collapsedLabel: String? = null
 ): Modifier {
     return this.semantics(mergeDescendants = true) {
         contentDescription = label
-        stateDescription = if (isExpanded) expandedLabel else collapsedLabel
+        stateDescription = if (isExpanded) expandedLabel ?: label else collapsedLabel ?: label
     }
 }
 
@@ -73,13 +73,13 @@ fun Modifier.accessibilityExpandable(
 fun Modifier.accessibilityToggle(
     isChecked: Boolean,
     label: String,
-    checkedLabel: String = "已开启",
-    uncheckedLabel: String = "已关闭"
+    checkedLabel: String? = null,
+    uncheckedLabel: String? = null
 ): Modifier {
     return this.semantics(mergeDescendants = true) {
         contentDescription = label
         role = Role.Switch
-        stateDescription = if (isChecked) checkedLabel else uncheckedLabel
+        stateDescription = if (isChecked) checkedLabel ?: label else uncheckedLabel ?: label
     }
 }
 

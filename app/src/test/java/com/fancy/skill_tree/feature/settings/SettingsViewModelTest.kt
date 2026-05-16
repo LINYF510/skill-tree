@@ -1,5 +1,7 @@
 package com.fancy.skill_tree.feature.settings
 
+import android.app.Application
+import android.content.Context
 import com.fancy.skill_tree.R
 import com.fancy.skill_tree.core.data.preferences.UserPreferences
 import com.fancy.skill_tree.core.domain.common.DomainException
@@ -7,6 +9,7 @@ import com.fancy.skill_tree.core.domain.common.Outcome
 import com.fancy.skill_tree.core.domain.entity.SkillNodeEntity
 import com.fancy.skill_tree.core.domain.usecase.node.ClearAllDataUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.CreateNodeUseCase
+import com.fancy.skill_tree.core.domain.usecase.node.LoadSampleDataUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.ExportToMarkdownUseCase
 import com.fancy.skill_tree.core.ui.error.ErrorSeverity
 import com.fancy.skill_tree.core.ui.error.ErrorStateManager
@@ -37,10 +40,12 @@ class SettingsViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private val exportToMarkdownUseCase = mockk<ExportToMarkdownUseCase>(relaxed = true)
-    private val createNodeUseCase = mockk<CreateNodeUseCase>(relaxed = true)
+    private val loadSampleDataUseCase = mockk<LoadSampleDataUseCase>(relaxed = true)
     private val clearAllDataUseCase = mockk<ClearAllDataUseCase>(relaxed = true)
     private val errorStateManager = mockk<ErrorStateManager>(relaxed = true)
     private val userPreferences = mockk<UserPreferences>(relaxed = true)
+
+    private val application = mockk<Application>(relaxed = true)
 
     private lateinit var viewModel: SettingsViewModel
 
@@ -56,8 +61,9 @@ class SettingsViewModelTest {
         )
 
         viewModel = SettingsViewModel(
+            application = application,
             exportToMarkdownUseCase = exportToMarkdownUseCase,
-            createNodeUseCase = createNodeUseCase,
+            loadSampleDataUseCase = loadSampleDataUseCase,
             clearAllDataUseCase = clearAllDataUseCase,
             errorStateManager = errorStateManager,
             userPreferences = userPreferences
@@ -76,8 +82,8 @@ class SettingsViewModelTest {
         @Test
         @DisplayName("成功导出时调用 onSuccess 回调")
         fun exportMarkdownSuccessCallsOnSuccess() = runTest {
-            val markdown = "# 技能树\n\n暂无节点数据\n"
-            coEvery { exportToMarkdownUseCase() } returns Outcome.Success(markdown)
+            val markdown = "# Skill Tree\n\nNo node data yet\n"
+            coEvery { exportToMarkdownUseCase(any<Context>()) } returns Outcome.Success(markdown)
 
             var callbackValue: String? = null
             viewModel.exportMarkdown { callbackValue = it }
@@ -89,8 +95,8 @@ class SettingsViewModelTest {
         @Test
         @DisplayName("导出失败时调用 ErrorStateManager")
         fun exportMarkdownFailureCallsErrorStateManager() = runTest {
-            val exception = DomainException.StorageError(RuntimeException("导出失败"))
-            coEvery { exportToMarkdownUseCase() } returns Outcome.Error(exception)
+            val exception = DomainException.StorageError(RuntimeException("export failed"))
+            coEvery { exportToMarkdownUseCase(any<Context>()) } returns Outcome.Error(exception)
 
             viewModel.exportMarkdown { }
             testDispatcher.scheduler.advanceUntilIdle()
@@ -105,28 +111,12 @@ class SettingsViewModelTest {
     inner class LoadSampleData {
 
         @Test
-        @DisplayName("成功加载时 createNodeUseCase 被调用 7 次")
-        fun loadSampleDataCallsCreateNodeSevenTimes() = runTest {
-            coEvery {
-                createNodeUseCase(any(), any(), any(), any(), any())
-            } returns Outcome.Success(
-                SkillNodeEntity(
-                    id = "sample",
-                    parentId = null,
-                    title = "test",
-                    nodeType = "ABILITY",
-                    level = 1,
-                    sortOrder = 0,
-                    isExpanded = true,
-                    createdAt = 1000L,
-                    updatedAt = 1000L
-                )
-            )
-
+        @DisplayName("成功加载时 loadSampleDataUseCase 被调用 1 次")
+        fun loadSampleDataCallsUseCaseOnce() = runTest {
             viewModel.loadSampleData()
             testDispatcher.scheduler.advanceUntilIdle()
 
-            coVerify(exactly = 7) { createNodeUseCase(any(), any(), any(), any(), any()) }
+            coVerify(exactly = 1) { loadSampleDataUseCase(any<Context>()) }
         }
     }
 

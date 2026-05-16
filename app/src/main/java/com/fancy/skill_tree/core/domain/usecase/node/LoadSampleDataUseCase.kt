@@ -1,5 +1,7 @@
 package com.fancy.skill_tree.core.domain.usecase.node
 
+import android.content.Context
+import com.fancy.skill_tree.R
 import com.fancy.skill_tree.core.data.repository.SkillTreeRepository
 import javax.inject.Inject
 
@@ -10,32 +12,35 @@ class LoadSampleDataUseCase @Inject constructor(
     private val repository: SkillTreeRepository,
     private val createNodeUseCase: CreateNodeUseCase
 ) {
-    suspend operator fun invoke() {
-        // 按顺序创建节点（从根节点开始）
-        createNodeUseCase("技能树", "ABILITY", null, customId = "sample-root")
-        createNodeUseCase("编程", "ABILITY", "sample-root", customId = "sample-programming")
+    /**
+     * 加载预置的示例技能树数据
+     * @param context Android Context，用于获取国际化字符串
+     */
+    suspend operator fun invoke(context: Context) {
+        createNodeUseCase(context.getString(R.string.sample_root_title), "ABILITY", null, customId = "sample-root")
+        createNodeUseCase(context.getString(R.string.sample_programming_title), "ABILITY", "sample-root", customId = "sample-programming")
         createNodeUseCase(
-            "Python",
+            context.getString(R.string.sample_python_title),
             "ABILITY",
             "sample-programming",
-            content = "## Python 学习路线\n\n- 基础语法\n- 数据结构\n- 面向对象编程\n- 异步编程",
+            content = context.getString(R.string.sample_python_content),
             customId = "sample-python"
         )
         createNodeUseCase(
-            "Kotlin",
+            context.getString(R.string.sample_kotlin_title),
             "ABILITY",
             "sample-programming",
-            content = "## Kotlin 学习路线\n\n- 协程\n- Compose\n- KMP",
+            content = context.getString(R.string.sample_kotlin_content),
             customId = "sample-kotlin"
         )
-        createNodeUseCase("Web开发", "ABILITY", "sample-programming", customId = "sample-web")
+        createNodeUseCase(context.getString(R.string.sample_web_title), "ABILITY", "sample-programming", customId = "sample-web")
         createNodeUseCase(
-            "设计",
+            context.getString(R.string.sample_design_title),
             "RESOURCE",
             "sample-root",
-            content = "## 设计资源\n\n- Figma\n- 色彩理论\n- 排版原则",
+            content = context.getString(R.string.sample_design_content),
             customId = "sample-design"
         )
-        createNodeUseCase("数据分析", "RESOURCE", "sample-python", customId = "sample-data-analysis")
+        createNodeUseCase(context.getString(R.string.sample_data_analysis_title), "RESOURCE", "sample-python", customId = "sample-data-analysis")
     }
 }

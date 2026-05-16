@@ -81,6 +81,25 @@
     <string name="attachment_empty">暂无附件</string>
     <string name="attachment_add_first">添加第一个附件</string>
     <string name="attachment_unknown_size">未知大小</string>
+    <string name="attachment_take_photo_desc">使用相机拍摄照片</string>
+    <string name="attachment_from_gallery_desc">从相册中选择图片</string>
+    <string name="attachment_from_file_desc">从文件管理器选择任意文件</string>
+
+    <!-- 导出 -->
+    <string name="export_tree_title">技能树</string>
+    <string name="export_no_data">暂无节点数据</string>
+
+    <!-- 示例数据 -->
+    <string name="sample_root_title">技能树</string>
+    <string name="sample_programming_title">编程</string>
+    <string name="sample_python_title">Python</string>
+    <string name="sample_kotlin_title">Kotlin</string>
+    <string name="sample_web_title">Web开发</string>
+    <string name="sample_design_title">设计</string>
+    <string name="sample_data_analysis_title">数据分析</string>
+    <string name="sample_python_content">## Python 学习路线\n\n- 基础语法\n- 数据结构\n- 面向对象编程\n- 异步编程</string>
+    <string name="sample_kotlin_content">## Kotlin 学习路线\n\n- 协程\n- Compose\n- KMP</string>
+    <string name="sample_design_content">## 设计资源\n\n- Figma\n- 色彩理论\n- 排版原则</string>
 
     <!-- 设置 -->
     <string name="settings_title">设置</string>
@@ -137,6 +156,42 @@
     <string name="achievement_twenty_links">网络构建者 - 创建了 20 个链接</string>
     <string name="achievement_five_level5">专家 - 5 个节点达到 5 级</string>
     <string name="achievement_tree_depth5">深度思考者 - 树深度达到 5 层</string>
+
+    <!-- 成就标题 -->
+    <string name="achievement_first_node_title">初出茅庐</string>
+    <string name="achievement_ten_nodes_title">枝繁叶茂</string>
+    <string name="achievement_fifty_nodes_title">技能大师</string>
+    <string name="achievement_twenty_links_title">链接达人</string>
+    <string name="achievement_ten_ai_confirms_title">AI 先驱</string>
+    <string name="achievement_five_level5_title">内容王者</string>
+    <string name="achievement_ten_voice_title">语音记录者</string>
+    <string name="achievement_twenty_images_title">图文并茂</string>
+    <string name="achievement_daily_streak_title">连续记录</string>
+    <string name="achievement_tree_depth5_title">深不可测</string>
+
+    <!-- 成就描述 -->
+    <string name="achievement_first_node_desc">创建第一个节点</string>
+    <string name="achievement_ten_nodes_desc">拥有 10 个节点</string>
+    <string name="achievement_fifty_nodes_desc">拥有 50 个节点</string>
+    <string name="achievement_twenty_links_desc">创建 20 条链接</string>
+    <string name="achievement_ten_ai_confirms_desc">确认 10 条 AI 推荐链接</string>
+    <string name="achievement_five_level5_desc">拥有 5 个 Lv.5 节点</string>
+    <string name="achievement_ten_voice_desc">使用语音输入 10 次</string>
+    <string name="achievement_twenty_images_desc">插入 20 张图片</string>
+    <string name="achievement_daily_streak_desc">连续 7 天创建/编辑节点</string>
+    <string name="achievement_tree_depth5_desc">技能树深度达到 5 层</string>
+
+    <!-- 成就奖励 -->
+    <string name="achievement_first_node_reward">解锁自定义图标</string>
+    <string name="achievement_ten_nodes_reward">解锁自定义主题色</string>
+    <string name="achievement_fifty_nodes_reward">解锁特殊树干样式</string>
+    <string name="achievement_twenty_links_reward">解锁特殊连线样式</string>
+    <string name="achievement_ten_ai_confirms_reward">解锁 AI 专属光效</string>
+    <string name="achievement_five_level5_reward">解锁金色主题</string>
+    <string name="achievement_ten_voice_reward">解锁语音波形动画</string>
+    <string name="achievement_twenty_images_reward">解锁图片墙展示模式</string>
+    <string name="achievement_daily_streak_reward">解锁连续天数徽章</string>
+    <string name="achievement_tree_depth5_reward">解锁深层探索者称号</string>
 
     <!-- 通用 -->
     <string name="common_ok">确定</string>
@@ -219,6 +274,14 @@
     <string name="onboard_ready_desc">你已经掌握了基础操作，以下是更多功能介绍：</string>
 
     <!-- 内容描述 -->
+    <string name="cd_delete_action">删除操作</string>
+
+    <!-- 等级名称 -->
+    <string name="level_master">大师</string>
+    <string name="level_expert">专家</string>
+    <string name="level_proficient">熟练</string>
+    <string name="level_beginner">入门</string>
+    <string name="level_novice">新手</string>
     <string name="cd_export">导出</string>
     <string name="cd_add_node">添加节点</string>
     <string name="cd_search">搜索</string>
@@ -245,6 +308,18 @@
     <string name="a11y_node_type_ability">能力节点：</string>
     <string name="a11y_node_type_resource">物质节点：</string>
     <string name="a11y_node_level">，等级 %d</string>
+    <string name="a11y_node_content">节点内容</string>
+    <string name="a11y_markdown_content">Markdown 内容</string>
+    <string name="a11y_unlocked">已解锁</string>
+    <string name="a11y_locked">未解锁</string>
+    <string name="stats_total_label">总计</string>
+    <string name="a11y_tag_label">标签：%s</string>
+    <string name="a11y_tag_tap_remove">点击移除</string>
+    <string name="settings_danger_zone">危险操作</string>
+    <string name="a11y_expanded">已展开</string>
+    <string name="a11y_collapsed">已折叠</string>
+    <string name="a11y_checked">已开启</string>
+    <string name="a11y_unchecked">已关闭</string>
     <string name="a11y_node_children">，%d 个子节点</string>
     <string name="a11y_node_has_content">，有详细内容</string>
     <string name="a11y_state_click_detail">点击查看详情</string>

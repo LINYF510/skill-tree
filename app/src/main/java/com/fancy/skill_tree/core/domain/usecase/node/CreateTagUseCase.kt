@@ -24,7 +24,7 @@ class CreateTagUseCase @Inject constructor(
         color: String? = null
     ): Outcome<TagEntity> {
         if (name.isBlank()) {
-            return Outcome.Error(DomainException.ValidationError("name", "标签名称不能为空"))
+            return Outcome.Error(DomainException.ValidationError("name", "Tag name cannot be empty"))
         }
         return try {
             val tag = repository.createTag(name, color)

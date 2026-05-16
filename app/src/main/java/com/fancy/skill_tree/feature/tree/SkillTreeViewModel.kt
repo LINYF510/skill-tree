@@ -1,5 +1,6 @@
 package com.fancy.skill_tree.feature.tree
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fancy.skill_tree.R
@@ -15,6 +16,7 @@ import com.fancy.skill_tree.core.domain.usecase.node.DeleteNodeUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.ExportToMarkdownUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.GetAllNodesUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.GetAllTagsUseCase
+import com.fancy.skill_tree.core.domain.usecase.node.LoadSampleDataUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.MoveNodeUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.ToggleNodeExpandUseCase
 import com.fancy.skill_tree.core.domain.usecase.node.UpdateNodeUseCase
@@ -35,6 +37,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class SkillTreeViewModel @Inject constructor(
+    private val application: Application,
     private val getAllNodesUseCase: GetAllNodesUseCase,
     private val createNodeUseCase: CreateNodeUseCase,
     private val updateNodeUseCase: UpdateNodeUseCase,
@@ -42,6 +45,7 @@ class SkillTreeViewModel @Inject constructor(
     private val moveNodeUseCase: MoveNodeUseCase,
     private val toggleNodeExpandUseCase: ToggleNodeExpandUseCase,
     private val exportToMarkdownUseCase: ExportToMarkdownUseCase,
+    private val loadSampleDataUseCase: LoadSampleDataUseCase,
     private val checkAchievementsUseCase: CheckAchievementsUseCase,
     private val searchNodesUseCase: SearchNodesUseCase,
     private val getAllTagsUseCase: GetAllTagsUseCase,
@@ -270,7 +274,7 @@ class SkillTreeViewModel @Inject constructor(
      */
     fun exportToMarkdown(onSuccess: (String) -> Unit) {
         viewModelScope.launch {
-            when (val result = exportToMarkdownUseCase()) {
+            when (val result = exportToMarkdownUseCase(application)) {
                 is Outcome.Success -> {
                     onSuccess(result.data)
                 }
@@ -408,31 +412,7 @@ class SkillTreeViewModel @Inject constructor(
      */
     fun loadSampleData() {
         viewModelScope.launch {
-            createNodeUseCase("技能树", "ABILITY", null, customId = "sample-root")
-            createNodeUseCase("编程", "ABILITY", "sample-root", customId = "sample-programming")
-            createNodeUseCase(
-                "Python",
-                "ABILITY",
-                "sample-programming",
-                content = "## Python 学习路线\n\n- 基础语法\n- 数据结构\n- 面向对象编程\n- 异步编程",
-                customId = "sample-python"
-            )
-            createNodeUseCase(
-                "Kotlin",
-                "ABILITY",
-                "sample-programming",
-                content = "## Kotlin 学习路线\n\n- 协程\n- Compose\n- KMP",
-                customId = "sample-kotlin"
-            )
-            createNodeUseCase("Web开发", "ABILITY", "sample-programming", customId = "sample-web")
-            createNodeUseCase(
-                "设计",
-                "RESOURCE",
-                "sample-root",
-                content = "## 设计资源\n\n- Figma\n- 色彩理论\n- 排版原则",
-                customId = "sample-design"
-            )
-            createNodeUseCase("数据分析", "RESOURCE", "sample-python", customId = "sample-data-analysis")
+            loadSampleDataUseCase(application)
 
             checkAchievements()
         }

@@ -1,5 +1,7 @@
 package com.fancy.skill_tree.feature.onboarding
 
+import android.app.Application
+import android.content.Context
 import com.fancy.skill_tree.core.domain.common.Outcome
 import com.fancy.skill_tree.core.domain.entity.SkillNodeEntity
 import com.fancy.skill_tree.core.domain.usecase.node.CreateNodeUseCase
@@ -32,6 +34,7 @@ class OnboardingViewModelTest {
     private val onboardingManager = mockk<OnboardingManager>(relaxed = true)
     private val loadSampleDataUseCase = mockk<LoadSampleDataUseCase>(relaxed = true)
     private val createNodeUseCase = mockk<CreateNodeUseCase>(relaxed = true)
+    private val application = mockk<Application>(relaxed = true)
 
     private lateinit var viewModel: OnboardingViewModel
 
@@ -55,6 +58,7 @@ class OnboardingViewModelTest {
         coEvery { createNodeUseCase(any(), any(), any(), any(), any()) } returns Outcome.Success(testNode)
 
         viewModel = OnboardingViewModel(
+            application = application,
             onboardingManager = onboardingManager,
             loadSampleDataUseCase = loadSampleDataUseCase,
             createNodeUseCase = createNodeUseCase
@@ -116,7 +120,7 @@ class OnboardingViewModelTest {
             viewModel.finish(true)
             testDispatcher.scheduler.advanceUntilIdle()
 
-            coVerify { loadSampleDataUseCase() }
+            coVerify { loadSampleDataUseCase(any<Context>()) }
             verify { onboardingManager.completeOnboarding() }
         }
 
@@ -126,7 +130,7 @@ class OnboardingViewModelTest {
             viewModel.finish(false)
             testDispatcher.scheduler.advanceUntilIdle()
 
-            coVerify(exactly = 0) { loadSampleDataUseCase() }
+            coVerify(exactly = 0) { loadSampleDataUseCase(any<Context>()) }
             verify { onboardingManager.completeOnboarding() }
         }
     }

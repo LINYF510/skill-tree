@@ -81,6 +81,25 @@
     <string name="attachment_empty">No attachments</string>
     <string name="attachment_add_first">Add first attachment</string>
     <string name="attachment_unknown_size">Unknown size</string>
+    <string name="attachment_take_photo_desc">Use camera to take a photo</string>
+    <string name="attachment_from_gallery_desc">Select an image from gallery</string>
+    <string name="attachment_from_file_desc">Select any file from file manager</string>
+
+    <!-- Export -->
+    <string name="export_tree_title">Skill Tree</string>
+    <string name="export_no_data">No node data yet</string>
+
+    <!-- Sample Data -->
+    <string name="sample_root_title">Skill Tree</string>
+    <string name="sample_programming_title">Programming</string>
+    <string name="sample_python_title">Python</string>
+    <string name="sample_kotlin_title">Kotlin</string>
+    <string name="sample_web_title">Web Development</string>
+    <string name="sample_design_title">Design</string>
+    <string name="sample_data_analysis_title">Data Analysis</string>
+    <string name="sample_python_content">## Python Learning Path\n\n- Basic Syntax\n- Data Structures\n- OOP\n- Async Programming</string>
+    <string name="sample_kotlin_content">## Kotlin Learning Path\n\n- Coroutines\n- Compose\n- KMP</string>
+    <string name="sample_design_content">## Design Resources\n\n- Figma\n- Color Theory\n- Typography</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -137,6 +156,42 @@
     <string name="achievement_twenty_links">Network Builder - Created 20 links</string>
     <string name="achievement_five_level5">Expert - 5 nodes reached level 5</string>
     <string name="achievement_tree_depth5">Deep Thinker - Tree depth reached 5 levels</string>
+
+    <!-- Achievement Titles -->
+    <string name="achievement_first_node_title">First Step</string>
+    <string name="achievement_ten_nodes_title">Branching Out</string>
+    <string name="achievement_fifty_nodes_title">Skill Master</string>
+    <string name="achievement_twenty_links_title">Link Master</string>
+    <string name="achievement_ten_ai_confirms_title">AI Pioneer</string>
+    <string name="achievement_five_level5_title">Content King</string>
+    <string name="achievement_ten_voice_title">Voice Recorder</string>
+    <string name="achievement_twenty_images_title">Visual Storyteller</string>
+    <string name="achievement_daily_streak_title">Consistent</string>
+    <string name="achievement_tree_depth5_title">Deep Explorer</string>
+
+    <!-- Achievement Descriptions -->
+    <string name="achievement_first_node_desc">Create your first node</string>
+    <string name="achievement_ten_nodes_desc">Own 10 nodes</string>
+    <string name="achievement_fifty_nodes_desc">Own 50 nodes</string>
+    <string name="achievement_twenty_links_desc">Create 20 links</string>
+    <string name="achievement_ten_ai_confirms_desc">Confirm 10 AI-suggested links</string>
+    <string name="achievement_five_level5_desc">Own 5 Lv.5 nodes</string>
+    <string name="achievement_ten_voice_desc">Use voice input 10 times</string>
+    <string name="achievement_twenty_images_desc">Insert 20 images</string>
+    <string name="achievement_daily_streak_desc">Create or edit nodes 7 days in a row</string>
+    <string name="achievement_tree_depth5_desc">Reach tree depth of 5 levels</string>
+
+    <!-- Achievement Rewards -->
+    <string name="achievement_first_node_reward">Custom icon</string>
+    <string name="achievement_ten_nodes_reward">Custom theme color</string>
+    <string name="achievement_fifty_nodes_reward">Special trunk style</string>
+    <string name="achievement_twenty_links_reward">Special link style</string>
+    <string name="achievement_ten_ai_confirms_reward">AI glow effect</string>
+    <string name="achievement_five_level5_reward">Gold theme</string>
+    <string name="achievement_ten_voice_reward">Voice wave animation</string>
+    <string name="achievement_twenty_images_reward">Photo wall mode</string>
+    <string name="achievement_daily_streak_reward">Streak badge</string>
+    <string name="achievement_tree_depth5_reward">Deep Explorer title</string>
 
     <!-- Common -->
     <string name="common_ok">OK</string>
@@ -219,6 +274,14 @@
     <string name="onboard_ready_desc">You\'ve mastered the basics. Here are more features to explore:</string>
 
     <!-- Content Descriptions -->
+    <string name="cd_delete_action">Delete</string>
+
+    <!-- Level Names -->
+    <string name="level_master">Master</string>
+    <string name="level_expert">Expert</string>
+    <string name="level_proficient">Proficient</string>
+    <string name="level_beginner">Beginner</string>
+    <string name="level_novice">Novice</string>
     <string name="cd_export">Export</string>
     <string name="cd_add_node">Add node</string>
     <string name="cd_search">Search</string>
@@ -245,6 +308,18 @@
     <string name="a11y_node_type_ability">Ability node: </string>
     <string name="a11y_node_type_resource">Resource node: </string>
     <string name="a11y_node_level">, Level %d</string>
+    <string name="a11y_node_content">Node content</string>
+    <string name="a11y_markdown_content">Markdown content</string>
+    <string name="a11y_unlocked">Unlocked</string>
+    <string name="a11y_locked">Locked</string>
+    <string name="stats_total_label">Total</string>
+    <string name="a11y_tag_label">Tag: %s</string>
+    <string name="a11y_tag_tap_remove">Tap to remove</string>
+    <string name="settings_danger_zone">Danger Zone</string>
+    <string name="a11y_expanded">Expanded</string>
+    <string name="a11y_collapsed">Collapsed</string>
+    <string name="a11y_checked">On</string>
+    <string name="a11y_unchecked">Off</string>
     <string name="a11y_node_children">, %d child nodes</string>
     <string name="a11y_node_has_content">, has content</string>
     <string name="a11y_state_click_detail">Tap to view details</string>

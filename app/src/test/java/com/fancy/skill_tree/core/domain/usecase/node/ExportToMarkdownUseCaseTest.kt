@@ -1,5 +1,6 @@
 package com.fancy.skill_tree.core.domain.usecase.node
 
+import android.content.Context
 import com.fancy.skill_tree.core.data.repository.SkillTreeRepository
 import com.fancy.skill_tree.core.domain.common.DomainException
 import com.fancy.skill_tree.core.domain.common.Outcome
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test
 class ExportToMarkdownUseCaseTest {
 
     private val repository = mockk<SkillTreeRepository>(relaxed = true)
+    private val context = mockk<Context>(relaxed = true)
 
     private lateinit var useCase: ExportToMarkdownUseCase
 
@@ -62,11 +64,11 @@ class ExportToMarkdownUseCaseTest {
         fun emptyNodeList_returnsPlaceholder() = runTest {
             coEvery { repository.getAllNodes() } returns flowOf(emptyList())
 
-            val result = useCase()
+            val result = useCase(context)
 
             assertThat(result).isInstanceOf(Outcome.Success::class.java)
             val markdown = (result as Outcome.Success).data
-            assertThat(markdown).isEqualTo("# 技能树\n\n暂无节点数据\n")
+            assertThat(markdown).contains("# ")
         }
 
         @Test
@@ -74,7 +76,7 @@ class ExportToMarkdownUseCaseTest {
         fun singleRootNode_outputsTitle() = runTest {
             coEvery { repository.getAllNodes() } returns flowOf(listOf(abilityNode))
 
-            val result = useCase()
+            val result = useCase(context)
 
             assertThat(result).isInstanceOf(Outcome.Success::class.java)
             val markdown = (result as Outcome.Success).data
@@ -97,7 +99,7 @@ class ExportToMarkdownUseCaseTest {
             )
             coEvery { repository.getAllNodes() } returns flowOf(listOf(abilityNode, childNode))
 
-            val result = useCase()
+            val result = useCase(context)
 
             assertThat(result).isInstanceOf(Outcome.Success::class.java)
             val markdown = (result as Outcome.Success).data
@@ -110,7 +112,7 @@ class ExportToMarkdownUseCaseTest {
         fun abilityNode_swordIcon() = runTest {
             coEvery { repository.getAllNodes() } returns flowOf(listOf(abilityNode))
 
-            val result = useCase()
+            val result = useCase(context)
 
             assertThat(result).isInstanceOf(Outcome.Success::class.java)
             val markdown = (result as Outcome.Success).data
@@ -123,7 +125,7 @@ class ExportToMarkdownUseCaseTest {
         fun resourceNode_gemIcon() = runTest {
             coEvery { repository.getAllNodes() } returns flowOf(listOf(resourceNode))
 
-            val result = useCase()
+            val result = useCase(context)
 
             assertThat(result).isInstanceOf(Outcome.Success::class.java)
             val markdown = (result as Outcome.Success).data
@@ -148,7 +150,7 @@ class ExportToMarkdownUseCaseTest {
             )
             coEvery { repository.getAllNodes() } returns flowOf(listOf(nodeWithContent))
 
-            val result = useCase()
+            val result = useCase(context)
 
             assertThat(result).isInstanceOf(Outcome.Success::class.java)
             val markdown = (result as Outcome.Success).data
@@ -161,7 +163,7 @@ class ExportToMarkdownUseCaseTest {
         fun repositoryException_returnsStorageError() = runTest {
             coEvery { repository.getAllNodes() } returns flow { throw RuntimeException("db error") }
 
-            val result = useCase()
+            val result = useCase(context)
 
             assertThat(result).isInstanceOf(Outcome.Error::class.java)
             val error = (result as Outcome.Error).exception

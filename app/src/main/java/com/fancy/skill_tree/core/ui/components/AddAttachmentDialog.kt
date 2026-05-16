@@ -18,6 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.fancy.skill_tree.R
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.fancy.skill_tree.ui.theme.LocalThemeColors
@@ -45,23 +47,23 @@ fun AddAttachmentDialog(
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Text(
-                    text = "添加附件",
+                    text = stringResource(R.string.attachment_add_title),
                     color = colors.textPrimary,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                AttachmentOption("📷", "拍照", "使用相机拍摄照片", onClick = onTakePhoto, colors = colors)
-                AttachmentOption("🖼️", "从相册选择", "从相册中选择图片", onClick = onPickFromGallery, colors = colors)
-                AttachmentOption("📄", "选择文件", "从文件管理器选择任意文件", onClick = onPickFile, colors = colors)
+                AttachmentOption("📷", stringResource(R.string.attachment_take_photo), stringResource(R.string.attachment_take_photo_desc), onClick = onTakePhoto, colors = colors)
+                AttachmentOption("🖼️", stringResource(R.string.attachment_from_gallery), stringResource(R.string.attachment_from_gallery_desc), onClick = onPickFromGallery, colors = colors)
+                AttachmentOption("📄", stringResource(R.string.attachment_from_file), stringResource(R.string.attachment_from_file_desc), onClick = onPickFile, colors = colors)
 
                 Spacer(modifier = Modifier.height(16.dp))
                 TextButton(
                     onClick = onDismiss,
                     modifier = Modifier.align(Alignment.End)
                 ) {
-                    Text("取消", color = colors.textSecondary)
+                    Text(stringResource(R.string.common_cancel), color = colors.textSecondary)
                 }
             }
         }
